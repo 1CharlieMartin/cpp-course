@@ -92,7 +92,7 @@ void Lab_1_02::execute()
 	//## H2 should be type string
 	//## The this doesn't compile either because the type of "ab" is actually const char *
 	//string H2 = "ab" + "12" + "3";
-	string H2 = string("ab" + string("12") + string("3"));
+	string H2 = string("ab") + string("12") + string("3");
 	cout << "H2 " << H2 << endl;
 
 	//Error, should it be "x"?
