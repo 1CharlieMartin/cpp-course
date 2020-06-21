@@ -142,10 +142,12 @@
     <ClCompile Include="cpp-course.cpp" />
     <ClCompile Include="Lab_1_02.cpp" />
     <ClCompile Include="Lab_1_03.cpp" />
+    <ClCompile Include="Lab_1_04.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Lab_1_02.h" />
     <ClInclude Include="Lab_1_03.h" />
+    <ClInclude Include="Lab_1_04.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
