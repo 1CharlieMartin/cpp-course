@@ -44,5 +44,31 @@ void Lab_1_04::execute()
 
 	cout << "final2 " << final2 << endl;
 
-	//** Codes goes here
+	//Code Goes Here 
+	string Question1;
+	string Question2;
+	string Question3;
+
+	string genieQuestion = "What would you like to wish for?";
+
+
+	cout << "Hello! I am a magic genie. You have three wishes." << endl;
+
+	cout << genieQuestion;
+	getline(cin, Question1);
+
+	cout << genieQuestion;
+	getline(cin, Question2);
+
+	cout << genieQuestion;
+	getline(cin, Question3);
+
+	cout << "You wished for " << Question2 << ", " << Question3 << ", and " << Question1 << endl;
+
+
+
+
+
+
+
 }
