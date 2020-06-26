@@ -6,6 +6,7 @@
 #include "Lab_1_02.h"
 #include "Lab_1_03.h"
 #include "Lab_1_04.h"
+#include "Lab_1_05.h""
 
 int main()
 {
@@ -15,7 +16,10 @@ int main()
 	//Lab_1_03 lab_1_03;
 	//lab_1_03.execute();
 
-	Lab_1_04 lab_1_04;
-	lab_1_04.execute();
+	//Lab_1_04 lab_1_04;
+	//lab_1_04.execute();
+
+	Lab_1_05 lab_1_05;
+	lab_1_05.execute();
 
 }
