@@ -1,6 +1,5 @@
 #include "Lab_1_05.h"
 
-
 void Lab_1_05::execute()
 {
 	cout << "Executing Lab 1.05" << endl;
@@ -13,25 +12,72 @@ void Lab_1_05::execute()
 void Lab_1_05::exercise_1()
 {
 	cout << "Executing Lab 1.05, exercise_1" << endl;
-
+	int height;
 	const float INCHES_PER_FOOT = 12.0f;
 
-	//** Code goes here
+	cout << "Please enter your height in integer inches: ";
+	cin >> height;
+
+	//cin_fail is undefined
+	//if (cin_fail())
+	//{
+	//	cout << "Sorry, your input was in the wrong format" << endl;
+	//	exit(1);
+	//}
+
+	int heightFeet = height / INCHES_PER_FOOT;
+	//int heightInches = height % INCHES_PER_FOOT;      ---->> gets error
+	int heightInches = height - (heightFeet * INCHES_PER_FOOT);
+	cout << "You are " << heightFeet << " feet and " << heightInches << " inches tall." << endl;
+
 
 }
-
 void Lab_1_05::exercise_2()
 {
 	cout << "Executing Lab 1.05, exercise_2" << endl;
 
-	//** Code goes here
+	const float INCHES_TO_METERS = 0.0254f;
+	const float POUNDS_TO_KILOS = 2.2f;
+	int feetOfHeight;
+	int inchesOfHeight;
+	float weightInPounds;
+	
 
+	cout << "Please enter your height in feet and inches: ";
+	cin >> feetOfHeight;
+	cin >> inchesOfHeight;
+
+	cout << "Please enter your weight in pounds: ";
+	cin >> weightInPounds;
+
+	int fullHeightInches = (feetOfHeight * 12) + inchesOfHeight;
+	float heightMeters = fullHeightInches * INCHES_TO_METERS;
+	float weightInKilos = weightInPounds * POUNDS_TO_KILOS;
+	float BMI = weightInKilos / (pow(heightMeters, 2));
+
+	cout << "Your BMI is " << BMI << "." << endl;
+	//the BMI is not correct but I don't know why.
 }
 
 void Lab_1_05::exercise_3()
 {
+	const float SEC_TO_MIN = 60.0f;
+	const float MIN_TO_DEGREE = 60.0f;
+	int degreesInitial;
+	int minsInitial;
+	int secInitial;
+	float finalDegrees;
+
 	cout << "Executing Lab 1.05, exercise_3" << endl;
 
-	//** Code goes here
+	cout << "Enter a latitude in degrees, minutes, and seconds:" << endl;
+	cout << "First, enter the degrees: ";
+	cin >> degreesInitial;
+	cout << "Next, enter the minutes of arc: ";
+	cin >> minsInitial;
+	cout << "Finally, enter the seconds of arc: ";
+	cin >> secInitial;
 
+	finalDegrees = (secInitial / SEC_TO_MIN / SEC_TO_MIN) + (minsInitial / MIN_TO_DEGREE) + degreesInitial;
+	cout << degreesInitial << " degrees, " << minsInitial << " minutes, " << secInitial << " seconds = " << finalDegrees << " degrees." << endl;
 }
