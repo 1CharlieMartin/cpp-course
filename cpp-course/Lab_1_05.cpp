@@ -51,15 +51,34 @@ void Lab_1_05::exercise_2()
 
 	cout << "Please enter your height in feet and inches: ";
 	cin >> feetOfHeight;
+	if (cin.fail())
+	{
+		cout << "Sorry, your input was in the wrong format" << endl;
+		exit(1);
+	}
+
+
 	cin >> inchesOfHeight;
+	if (cin.fail())
+	{
+		cout << "Sorry, your input was in the wrong format" << endl;
+		exit(1);
+	}
+
 
 	cout << "Please enter your weight in pounds: ";
 	cin >> weightInPounds;
+	if (cin.fail())
+	{
+		cout << "Sorry, your input was in the wrong format" << endl;
+		exit(1);
+	}
+
 
 	int fullHeightInches = (feetOfHeight * 12) + inchesOfHeight;
 	float heightMeters = fullHeightInches * INCHES_TO_METERS;
 	//## The instructions say to divide weight in pounds by the number of pounds in a kilo
-	float weightInKilos = weightInPounds * POUNDS_TO_KILOS;
+	float weightInKilos = weightInPounds / POUNDS_TO_KILOS;
 	float BMI = weightInKilos / (pow(heightMeters, 2));
 
 	cout << "Your BMI is " << BMI << "." << endl;
@@ -80,10 +99,27 @@ void Lab_1_05::exercise_3()
 	cout << "Enter a latitude in degrees, minutes, and seconds:" << endl;
 	cout << "First, enter the degrees: ";
 	cin >> degreesInitial;
+	if (cin.fail())
+	{
+		cout << "Sorry, your input was in the wrong format" << endl;
+		exit(1);
+	}
+
 	cout << "Next, enter the minutes of arc: ";
 	cin >> minsInitial;
+	if (cin.fail())
+	{
+		cout << "Sorry, your input was in the wrong format" << endl;
+		exit(1);
+	}
+
 	cout << "Finally, enter the seconds of arc: ";
 	cin >> secInitial;
+	if (cin.fail())
+	{
+		cout << "Sorry, your input was in the wrong format" << endl;
+		exit(1);
+	}
 
 	finalDegrees = (secInitial / SEC_TO_MIN / SEC_TO_MIN) + (minsInitial / MIN_TO_DEGREE) + degreesInitial;
 	cout << degreesInitial << " degrees, " << minsInitial << " minutes, " << secInitial << " seconds = " << finalDegrees << " degrees." << endl;
