@@ -8,6 +8,7 @@
 #include "Lab_1_04.h"
 #include "Lab_1_05.h"
 #include "Project_1.h"
+#include "Lab_2_01.h"
 
 int main()
 {
@@ -24,6 +25,9 @@ int main()
 	//lab_1_05.execute();
 
 	Project_1 project_1;
-	project_1.execute();
+	//project_1.execute();
+
+	Lab_2_01 lab_2_01;
+	lab_2_01.execute();
 
 }
