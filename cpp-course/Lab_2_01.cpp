@@ -40,8 +40,8 @@ void Lab_2_01::execute()
 
 	while (true) // i.e. an infinite loop
 	{
-		cout << "Please enter an integer and a float " << endl;
-		cin >> x >> y;
+		cout << "Please enter an integer " << endl;
+		cin >> x;
 		
 
 		if (!cin.fail()) {
@@ -53,7 +53,29 @@ void Lab_2_01::execute()
 		else {
 			// cin.fail() is true
 			cin.clear(); // clear the fail() condition
-			cout << "You have entered an invalid integer or float, please try again" << endl;
+			cout << "You have entered an invalid integer, please try again" << endl;
+		}
+
+		cin.ignore(numeric_limits<streamsize>::max(), '\n'); // flushes input up to eol
+	}
+
+
+	while (true) // i.e. an infinite loop
+	{
+		cout << "Please enter an float " << endl;
+		cin >> y;
+
+
+		if (!cin.fail()) {
+			if (cin.peek() == '\n') // at eol?
+				break; // yes, exit loop
+			else
+				cout << "Sorry, you have extraneous input, please try again" << endl;
+		}
+		else {
+			// cin.fail() is true
+			cin.clear(); // clear the fail() condition
+			cout << "You have entered an invalid float, please try again" << endl;
 		}
 
 		cin.ignore(numeric_limits<streamsize>::max(), '\n'); // flushes input up to eol
