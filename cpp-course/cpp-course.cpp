@@ -11,6 +11,8 @@
 #include "Lab_2_01.h"
 #include "Lab_2_02.h"
 #include "Lab_2_03.h"
+#include "Lab_2_04.h"
+
 
 int main()
 {
@@ -37,5 +39,8 @@ int main()
 
 	Lab_2_03 lab_2_03;
 	lab_2_03.execute();
+
+	Lab_2_04 lab_2_04;
+	lab_2_04.execute();
 
 }

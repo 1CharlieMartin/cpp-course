@@ -147,6 +147,7 @@
     <ClCompile Include="Lab_2_01.cpp" />
     <ClCompile Include="Lab_2_02.cpp" />
     <ClCompile Include="Lab_2_03.cpp" />
+    <ClCompile Include="Lab_2_04.cpp" />
     <ClCompile Include="Project_1.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -157,6 +158,7 @@
     <ClInclude Include="Lab_2_01.h" />
     <ClInclude Include="Lab_2_02.h" />
     <ClInclude Include="Lab_2_03.h" />
+    <ClInclude Include="Lab_2_04.h" />
     <ClInclude Include="Project_1.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
