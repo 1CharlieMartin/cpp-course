@@ -15,21 +15,17 @@ void Lab_2_03::execute()
 	cin >> a >> b >> c;
 
 	if ((b + c < a) || (a + b < c) || (c + a < b)) {
-		//** FIX Don't ignore warnings!
-		//** 1>C:\Users\726Admin\source\repos\cpp-course\cpp-course\Lab_2_03.cpp(24,17): warning C4805: '==': unsafe mix of type 'bool' and type 'float' in operation
-		// Can you figure out what the problem is here?
-
+	
 		cout << "Your triangle is not valid." << endl;
 		exit(0);
 	}
 
 
-	if (a == b == c) {
+	if ((a == b) && (a == c) && (b == c)) {
 		triType = "equilateral";
 	}
 
-	//** FIX This can be simplified because (a != b) is the same as (b != a), etc.
-	else if ((a != b) && (a != c) && (b != a) && (b != c) && (c != a) && (c != b)) {
+	else if ((a != b) && (c != a) && (c != b)) {
 		triType = "scalene";
 	}
 
