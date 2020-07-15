@@ -37,8 +37,8 @@ int main()
 	//Lab_2_02 lab_2_02;
 	//lab_2_02.execute();
 
-	Lab_2_03 lab_2_03;
-	lab_2_03.execute();
+	//Lab_2_03 lab_2_03;
+	//lab_2_03.execute();
 
 	Lab_2_04 lab_2_04;
 	lab_2_04.execute();

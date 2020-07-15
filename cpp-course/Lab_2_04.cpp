@@ -12,6 +12,7 @@ void Lab_2_04::execute()
 	cout << "Food Guessing Quiz" << endl;
 
 	// Starter code
+	//** You can change these if you like.
 	std::array<string, 6> food { "donuts", "pancakes", "bacon", "waffles", "eggs", "bagels" }; // initializer list
 	std::array<int, 6> score { 0, 0, 0, 0, 0, 0 };
 
