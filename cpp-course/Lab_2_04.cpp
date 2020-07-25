@@ -11,7 +11,7 @@ void Lab_2_04::execute()
 	std::array<string, 10> prize{ "Teddy Bear", "Gift Card", "Bracelet", "Toy Car", "Prize Tickets", "$10,000", "Dog", "Dog food", "Tortilla","Sombrero" };
 	cout << "Pick a number from 0 to 9 determine your prize:";
 	cin >> userNum;
-	
+
 	if ((userNum < 0) || (userNum > prize.size() - 1)) {
 		cout << "Your input is out of range." << endl;
 		exit(0);
@@ -24,10 +24,10 @@ void Lab_2_04::execute()
 	//** Code for Food Guessing Quiz goes here
 	cout << "Food Guessing Quiz" << endl;
 
-	// Starter code
-	//** You can change these if you like.
-	std::array<string, 6> food { "donuts", "pancakes", "bacon", "waffles", "eggs", "bagels" }; // initializer list
-	std::array<int, 6> score { 0, 0, 0, 0, 0, 0 };
+	// Starter code - part 1
+	//** You can change these if you like but you need 6 foods.
+	std::array<string, 6> food{ "donuts", "pancakes", "bacon", "waffles", "eggs", "bagels" }; // initializer list
+	std::array<int, 6> score{ 0, 0, 0, 0, 0, 0 };
 
 	cout << "Please answer y or n to each question" << endl;
 	char YorN;
@@ -43,7 +43,7 @@ void Lab_2_04::execute()
 	if (YorN == 'y') {
 		score[0] = score[0] + 1;
 		score[5] = score[5] + 1;
-    }
+	}
 
 	cout << "Do you like food that is sweet ";
 	cin >> YorN;
@@ -143,7 +143,12 @@ void Lab_2_04::execute()
 		score[4] = score[4] + 1;
 	}
 
-	std::sort(score.begin(), score.end());  //once I sort score how will I know which position corresponds to which food?
+	//** Starter code - part 2
+	// std::sort(score.begin(), score.end());  //once I sort score how will I know which position corresponds to which food?
 
+	array<int, 6>::const_iterator it = max_element(score.begin(), score.end());
+	int max_element_index = (int) (it - score.begin());
+	cout << "The food with the highest score is " << food[max_element_index] << endl;;
+	cout << "The highest score is " << to_string(score[max_element_index]) << endl;
 
 }
