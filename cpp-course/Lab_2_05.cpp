@@ -5,6 +5,48 @@ void Lab_2_05::execute()
 {
 	cout << "Executing Lab 2.05" << endl;
 
-	//** Code goes here!!
+	vector<int> v{ 1,2,3 };
+	cout << "The elements of std::vector v:" << endl;
+	for (int j = 0; j < v.size(); j++) {
+		cout << v[j] << "" << endl;
+	};
+
+	int userChoice;
+	int PLAYER_X_SELECTION = -1;
+	vector<int> board{ 0,0,0,0,0,0,0,0,0 };
+
+	while (true) // i.e. an infinite loop
+	{
+		cout << "Enter the a number from 1-9 to pick the square that you would like to place an X:";
+		cin >> userChoice;
+		if (!cin.fail()) {
+			if ((userChoice > 9) || (userChoice < 1))
+				cout << "Your number is out of bounds. Please try again." << endl;
+			else {
+				break; // yes, exit loop
+			}
+		}
+		else {
+			// cin.fail() is true
+			cin.clear(); // clear the fail() condition
+			cout << "You have entered an invalid integer, please try again" << endl;
+		}
+
+		cin.ignore(numeric_limits<streamsize>::max(), '\n'); // flushes input up to eol
+
+	}
+
+	board[userChoice - 1] = -1;
+	
+	for (int i = 0; i < board.size(); i++) {
+		if (board[i] == 0)
+			cout << "Z";
+		if (board[i] == -1)
+			cout << "X";
+		if ((i == 2) || (i == 5))
+			cout << endl;
+	};
+
+	
 
 }
