@@ -5,11 +5,12 @@ void Lab_2_05::execute()
 {
 	cout << "Executing Lab 2.05" << endl;
 
-	vector<int> v{ 1,2,3 };
-	cout << "The elements of std::vector v:" << endl;
-	for (int j = 0; j < v.size(); j++) {
-		cout << v[j] << "" << endl;
-	};
+	// This is an example.
+	//vector<int> v{ 1,2,3 };
+	//cout << "The elements of std::vector v:" << endl;
+	//for (int j = 0; j < v.size(); j++) {
+	//	cout << v[j] << "" << endl;
+	//};
 
 	int userChoice;
 	int PLAYER_X_SELECTION = -1;
@@ -17,7 +18,7 @@ void Lab_2_05::execute()
 
 	while (true) // i.e. an infinite loop
 	{
-		cout << "Enter the a number from 1-9 to pick the square that you would like to place an X:";
+		cout << "Enter the a number from 1-9 to pick the square that you would like to place an X: ";
 		cin >> userChoice;
 		if (!cin.fail()) {
 			if ((userChoice > 9) || (userChoice < 1))
@@ -36,17 +37,17 @@ void Lab_2_05::execute()
 
 	}
 
-	board[userChoice - 1] = -1;
-	
+	board[(size_t) userChoice - 1] = PLAYER_X_SELECTION; // use symbolic constant here; need cast to size_t to get around warning
+
+	cout << "------" << endl;
 	for (int i = 0; i < board.size(); i++) {
 		if (board[i] == 0)
-			cout << "Z";
-		if (board[i] == -1)
-			cout << "X";
-		if ((i == 2) || (i == 5))
-			cout << endl;
-	};
+			cout << "Z|";
+		if (board[i] == PLAYER_X_SELECTION) // use symbolic constant here
+			cout << "X|";
+		if ((i + 1) % 3 == 0)
+			cout << endl << "------" << endl;
 
-	
+	};
 
 }
