@@ -42,7 +42,7 @@ void Lab_2_05::execute()
 	cout << "------" << endl;
 	for (int i = 0; i < board.size(); i++) {
 		if (board[i] == 0)
-			cout << "Z|";
+			cout << " ";
 		if (board[i] == PLAYER_X_SELECTION) // use symbolic constant here
 			cout << "X|";
 		if ((i + 1) % 3 == 0)
