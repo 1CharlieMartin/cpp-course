@@ -10,7 +10,7 @@ void Lab_2_06::execute()
 	const int PLAYER_X_SELECTION = -1;
 	const int SPOT_OPEN = 0;
 	const int PLAYER_O_SELECTION = 1;
-	vector<int> board{ 0,0,0,0,0,0,0,0,0 };
+	vector<int> board{ SPOT_OPEN,SPOT_OPEN,SPOT_OPEN,SPOT_OPEN,SPOT_OPEN,SPOT_OPEN,SPOT_OPEN,SPOT_OPEN,SPOT_OPEN };
 	int p = 1;
 
 
@@ -53,6 +53,8 @@ void Lab_2_06::execute()
 					cout << "Your number is out of bounds. Please try again." << endl;
 				else if (board[userChoiceO] != SPOT_OPEN)
 					cout << "That spot is not open. Please try again." << endl;
+				else
+					break;
 
 			}
 			else {
@@ -61,6 +63,7 @@ void Lab_2_06::execute()
 				cout << "You have entered an invalid integer, please try again" << endl;
 			}
 			cin.ignore(numeric_limits<streamsize>::max(), '\n'); // flushes input up to eol
+			
 		}
 		
 
