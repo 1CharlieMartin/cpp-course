@@ -31,7 +31,7 @@ void Lab_2_06::execute()
 			if (!cin.fail()) {
 				if ((userChoiceX > 9) || (userChoiceX < 1))
 					cout << "Your number is out of bounds. Please try again." << endl;
-				else if (board[userChoiceX] != SPOT_OPEN)
+				else if (board[userChoiceX - 1] != SPOT_OPEN)
 					cout << "That spot is not open. Please try again." << endl;
 				else
 					break;
@@ -51,7 +51,7 @@ void Lab_2_06::execute()
 			if (!cin.fail()) {
 				if ((userChoiceO > 9) || (userChoiceO < 1))
 					cout << "Your number is out of bounds. Please try again." << endl;
-				else if (board[userChoiceO] != SPOT_OPEN)
+				else if (board[userChoiceO - 1] != SPOT_OPEN)
 					cout << "That spot is not open. Please try again." << endl;
 				else
 					break;
