@@ -151,6 +151,7 @@
     <ClCompile Include="Lab_2_05.cpp" />
     <ClCompile Include="Lab_2_06.cpp" />
     <ClCompile Include="Project_1.cpp" />
+    <ClCompile Include="Project_2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Lab_1_02.h" />
@@ -164,6 +165,7 @@
     <ClInclude Include="Lab_2_05.h" />
     <ClInclude Include="Lab_2_06.h" />
     <ClInclude Include="Project_1.h" />
+    <ClInclude Include="Project_2.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
