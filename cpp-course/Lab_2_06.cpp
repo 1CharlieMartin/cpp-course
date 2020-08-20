@@ -33,8 +33,11 @@ void Lab_2_06::execute()
 					cout << "Your number is out of bounds. Please try again." << endl;
 				else if (board[userChoiceX - 1] != SPOT_OPEN)
 					cout << "That spot is not open. Please try again." << endl;
-				else
+				else{
+					board[(size_t)userChoiceX - 1] = PLAYER_X_SELECTION; // use symbolic constant here; need cast to size_t to get around warning
 					break;
+				}
+					
 
 			}
 			else {
@@ -53,8 +56,11 @@ void Lab_2_06::execute()
 					cout << "Your number is out of bounds. Please try again." << endl;
 				else if (board[userChoiceO - 1] != SPOT_OPEN)
 					cout << "That spot is not open. Please try again." << endl;
-				else
+				else {
+					board[(size_t)userChoiceO - 1] = PLAYER_O_SELECTION;
 					break;
+				}
+					
 
 			}
 			else {
@@ -67,8 +73,6 @@ void Lab_2_06::execute()
 		}
 		
 
-		board[(size_t)userChoiceX - 1] = PLAYER_X_SELECTION; // use symbolic constant here; need cast to size_t to get around warning
-		board[(size_t)userChoiceO - 1] = PLAYER_O_SELECTION;
 
 		cout << "------" << endl;
 		for (int i = 0; i < board.size(); i++) {
@@ -83,8 +87,10 @@ void Lab_2_06::execute()
 
 		};
 
+		p++;
+
 	}
 
-	
+
 
 }
