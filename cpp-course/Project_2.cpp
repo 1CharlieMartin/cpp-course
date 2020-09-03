@@ -23,7 +23,7 @@ void Project_2::execute()
 	std::list<string>::const_iterator weapons_it;
 
 	string userInput;
-	string helpFile1 = "Pick Up: Pick up the contents of the room";
+	string helpFile1 = "Pickup: Pick up the contents of the room";
 	string helpFile2 = "Right: Enter the room to the right";
 	string helpFile3 = "Left: Enter the room to the left";
 	string helpFile4 = "Fight: Fight the monster in the current room";
@@ -41,7 +41,8 @@ void Project_2::execute()
 		/* floor 2 */ {"nothing", "stairs up", "nothing", "magic crystals", "stairs down", "sword"},
 		/* floor 3 */ { "PRIZE", "boss monster", "nothing", "nothing", "stairs down", "monster" }} };
 
-
+	enum class Move { none, up, down, left, right };
+	Move prev_move = Move::none;
 	
 
 	cout << "Welcome to Charlie's Dungeon Masterpiece!" << endl << "Type START to play!" << endl;
@@ -87,24 +88,31 @@ void Project_2::execute()
 					if (user_position.second == ROOM_6)
 						cout << "You are already in the farthest room to the right." << endl;
 
-					//if ((game_board[user_position.first][user_position.second] == "monster") || (game_board[user_position.first][user_position.second] == "boss monster")) {
-					//	cout << "YOU DIED" << endl << "You walked past a monster"
-					//}
+					else if (((game_board[user_position.first][user_position.second] == "monster") || (game_board[user_position.first][user_position.second] == "boss monster")) && (prev_move != Move::left)) {
+						cout << "YOU DIED" << endl << "You walked past a monster" << endl;
+						break;
+					}
 
-					else
+					else {
 						user_position.second++;
+						prev_move = Move::right;
+					}
 				}
 
 				if (userInput == "Left") {
 					if (user_position.second == ROOM_1)
 						cout << "You are already in the farthest room to the left." << endl;
 
-					//if ((game_board[user_position.first][user_position.second] == "monster") || (game_board[user_position.first][user_position.second] == "boss monster")) {
-					//	cout << "YOU DIED" << endl << "You walked past a monster"
-					//}
-
-					else
+					else if (((game_board[user_position.first][user_position.second] == "monster") || (game_board[user_position.first][user_position.second] == "boss monster")) && (prev_move != Move::right)) {
+						
+						cout << "YOU DIED" << endl << "You walked past a monster" << endl;
+						break;
+					}
+					
+					else {
 						user_position.second--;
+						prev_move = Move::left;
+					}
 				}
 
 				if (userInput == "Pickup") {
