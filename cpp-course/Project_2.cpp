@@ -32,6 +32,7 @@ void Project_2::execute()
 	string helpFile7 = "Retreat: Run away from the boss monster";
 	string helpFile8 = "QUIT: Quit the game";
 
+	bool game_over = false;
 	
 	// This is the declaration of the two-dimensional array for the game board.
 	// The first dimension is for the 3 floors, the second dimension is for the
@@ -49,7 +50,12 @@ void Project_2::execute()
 	cin >> userInput;
 
 	while (true) {
-		if (userInput == "START") {
+
+		if (userInput == "QUIT") {
+			break;
+		}
+
+		else if (userInput == "START") {
 
 			// We can represent a room on the board with a std::pair, where "first" is the
 			// floor and "second" is the room.
@@ -75,7 +81,7 @@ void Project_2::execute()
 
 
 
-			while (true) {
+			while (!game_over) {
 				cout << "You see " << game_board[user_position.first][user_position.second] << " in this room" << endl;
 				cout << "What do you want to do?" << endl;
 				cin >> userInput;
@@ -90,7 +96,7 @@ void Project_2::execute()
 
 					else if (((game_board[user_position.first][user_position.second] == "monster") || (game_board[user_position.first][user_position.second] == "boss monster")) && (prev_move != Move::left)) {
 						cout << "YOU DIED" << endl << "You walked past a monster" << endl;
-						break;
+						game_over = true;
 					}
 
 					else {
@@ -106,7 +112,7 @@ void Project_2::execute()
 					else if (((game_board[user_position.first][user_position.second] == "monster") || (game_board[user_position.first][user_position.second] == "boss monster")) && (prev_move != Move::right)) {
 						
 						cout << "YOU DIED" << endl << "You walked past a monster" << endl;
-						break;
+						game_over = true;
 					}
 					
 					else {
@@ -142,6 +148,9 @@ void Project_2::execute()
 						user_position.first--;
 					}
 
+					else if (game_board[user_position.first][user_position.second] == "boss monster")
+						user_position.first--;
+
 					else
 						cout << "There are no downwards stairs in this room." << endl;
 				}
@@ -152,7 +161,7 @@ void Project_2::execute()
 						weapons_it = find(user_weapons.begin(), user_weapons.end(), "sword");
 						if (weapons_it == user_weapons.end()) {
 							cout << "YOU DIED" << endl << "You fought the monster without a sword." << endl;
-							break;
+							game_over = true;
 						}
 						else {
 							cout << "You killed the monster, but your sword broke!" << endl;
@@ -167,7 +176,7 @@ void Project_2::execute()
 						weapons_it = find(user_weapons.begin(), user_weapons.end(), "sword");
 						if (weapons_it == user_weapons.end()) {
 							cout << "YOU DIED" << endl << "You fought the monster without a sword." << endl;
-							break;
+							game_over = true;
 						}
 						else {
 							user_weapons.erase(weapons_it);
@@ -175,7 +184,7 @@ void Project_2::execute()
 							weapons_it = find(user_weapons.begin(), user_weapons.end(), "magic crystals");
 							if (weapons_it == user_weapons.end()) {
 								cout << "YOU DIED" << endl << "You fought the monster without magic crystals." << endl;
-								break;
+								game_over = true;
 							}
 							else {
 								user_weapons.erase(weapons_it);
@@ -186,14 +195,8 @@ void Project_2::execute()
 					}
 				}
 
-				if (userInput == "Retreat") {
-					if (game_board[user_position.first][user_position.second] == "boss monster") {
-						user_position.first--;
-					}
-				}
-
 				if (userInput == "QUIT")
-					break;
+					game_over = true;
 
 				if ((userInput != "QUIT") && (userInput != "START") && (userInput != "Retreat") && (userInput != "Fight") && (userInput != "Help") && (userInput != "Right") && (userInput != "Left") && (userInput != "Pickup") && (userInput != "Upstairs") && (userInput != "Downstairs")) {
 					cout << "That is not a command. Type Help to view the list of commands." << endl;
@@ -202,16 +205,16 @@ void Project_2::execute()
 				if (user_weapons.size() > 0) {
 					if (user_weapons.front() == "PRIZE") {
 						cout << "YOU WIN!" << endl;
-						break;
+						game_over = true;
 					}
 				}
 			}
-			cout << "Type START to play again! Or, type QUIT to quit the game." << endl;
-			cin >> userInput;
+			
 
-			if (userInput == "QUIT")
-				break;
+			
 		}
+		cout << "Type START to play again! Or, type QUIT to quit the game." << endl;
+		cin >> userInput;
 	}
 	// Here's how you might use the pair.
 	//cout << "The user's starting position is floor " << user_position.first + 1 << ", room " << user_position.second + 1 << endl;
