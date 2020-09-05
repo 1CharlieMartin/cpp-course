@@ -45,41 +45,9 @@ void Project_2::execute()
 	enum class Move { none, up, down, left, right };
 	Move prev_move = Move::none;
 	
+std::pair<int, int> user_position(FLOOR_1, ROOM_5);
 
-	cout << "Welcome to Charlie's Dungeon Masterpiece!" << endl << "Type START to play!" << endl;
-	cin >> userInput;
-
-	while (true) {
-
-		if (userInput == "QUIT") {
-			break;
-		}
-
-		else if (userInput == "START") {
-
-			// We can represent a room on the board with a std::pair, where "first" is the
-			// floor and "second" is the room.
-			std::pair<int, int> user_position(FLOOR_1, ROOM_5);
-			game_board[FLOOR_1][ROOM_1] = "stairs up";
-			game_board[FLOOR_1][ROOM_2] = "monster";
-			game_board[FLOOR_1][ROOM_3] = "nothing";
-			game_board[FLOOR_1][ROOM_4] = "sword";
-			game_board[FLOOR_1][ROOM_5] = "nothing";
-			game_board[FLOOR_1][ROOM_6] = "monster";
-			game_board[FLOOR_2][ROOM_1] = "nothing";
-			game_board[FLOOR_2][ROOM_2] = "stairs up";
-			game_board[FLOOR_2][ROOM_3] = "nothing";
-			game_board[FLOOR_2][ROOM_4] = "magic crystals";
-			game_board[FLOOR_2][ROOM_5] = "stairs down";
-			game_board[FLOOR_2][ROOM_6] = "sword";
-			game_board[FLOOR_3][ROOM_1] = "PRIZE";
-			game_board[FLOOR_3][ROOM_2] = "boss monster";
-			game_board[FLOOR_3][ROOM_3] = "nothing";
-			game_board[FLOOR_3][ROOM_4] = "nothing";
-			game_board[FLOOR_3][ROOM_5] = "stairs down";
-			game_board[FLOOR_3][ROOM_6] = "monster";
-
-
+	cout << "Welcome to Charlie's Dungeon Masterpiece!" << endl;
 
 			while (!game_over) {
 				cout << "You see " << game_board[user_position.first][user_position.second] << " in this room" << endl;
@@ -94,8 +62,13 @@ void Project_2::execute()
 					if (user_position.second == ROOM_6)
 						cout << "You are already in the farthest room to the right." << endl;
 
-					else if (((game_board[user_position.first][user_position.second] == "monster") || (game_board[user_position.first][user_position.second] == "boss monster")) && (prev_move != Move::left)) {
+					else if (((game_board[user_position.first][user_position.second] == "monster")) && (prev_move != Move::left)) {
 						cout << "YOU DIED" << endl << "You walked past a monster" << endl;
+						game_over = true;
+					}
+
+					else if (((game_board[user_position.first][user_position.second] == "boss monster")) && (prev_move != Move::up)) {
+						cout << "YOU DIED" << endl << "You walked past the boss monster" << endl;
 						game_over = true;
 					}
 
@@ -109,9 +82,14 @@ void Project_2::execute()
 					if (user_position.second == ROOM_1)
 						cout << "You are already in the farthest room to the left." << endl;
 
-					else if (((game_board[user_position.first][user_position.second] == "monster") || (game_board[user_position.first][user_position.second] == "boss monster")) && (prev_move != Move::right)) {
+					else if (((game_board[user_position.first][user_position.second] == "monster")) && (prev_move != Move::right)) {
 						
 						cout << "YOU DIED" << endl << "You walked past a monster" << endl;
+						game_over = true;
+					}
+
+					else if (((game_board[user_position.first][user_position.second] == "boss monster")) && (prev_move != Move::up)) {
+						cout << "YOU DIED" << endl << "You walked past the boss monster" << endl;
 						game_over = true;
 					}
 					
@@ -137,6 +115,7 @@ void Project_2::execute()
 				if (userInput == "Upstairs") {
 					if (game_board[user_position.first][user_position.second] == "stairs up") {
 						user_position.first++;
+						prev_move = Move::up;
 					}
 
 					else
@@ -146,10 +125,13 @@ void Project_2::execute()
 				if (userInput == "Downstairs") {
 					if (game_board[user_position.first][user_position.second] == "stairs down") {
 						user_position.first--;
+						prev_move = Move::down;
 					}
 
-					else if (game_board[user_position.first][user_position.second] == "boss monster")
+					else if (game_board[user_position.first][user_position.second] == "boss monster") {
 						user_position.first--;
+						prev_move = Move::down;
+					}
 
 					else
 						cout << "There are no downwards stairs in this room." << endl;
@@ -210,12 +192,6 @@ void Project_2::execute()
 				}
 			}
 			
-
-			
-		}
-		cout << "Type START to play again! Or, type QUIT to quit the game." << endl;
-		cin >> userInput;
-	}
 	// Here's how you might use the pair.
 	//cout << "The user's starting position is floor " << user_position.first + 1 << ", room " << user_position.second + 1 << endl;
 
