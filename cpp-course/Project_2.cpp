@@ -29,7 +29,7 @@ void Project_2::execute()
 	string helpFile4 = "Fight: Fight the monster in the current room";
 	string helpFile5 = "Upstairs: Move you to the next floor up";
 	string helpFile6 = "Downstairs: Move you to the next floor down";
-	string helpFile7 = "Retreat: Run away from the boss monster";
+	//## PY string helpFile7 = "Retreat: Run away from the boss monster";
 	string helpFile8 = "QUIT: Quit the game";
 
 	bool game_over = false;
@@ -55,7 +55,7 @@ std::pair<int, int> user_position(FLOOR_1, ROOM_5);
 				cin >> userInput;
 
 				if (userInput == "Help") {
-					cout << helpFile1 << endl << helpFile2 << endl << helpFile3 << endl << helpFile4 << endl << helpFile5 << endl << helpFile6 << endl << helpFile7 << endl << helpFile8 << endl;
+					cout << helpFile1 << endl << helpFile2 << endl << helpFile3 << endl << helpFile4 << endl << helpFile5 << endl << helpFile6 << endl /* ##PY << helpFile7 << endl */ << helpFile8 << endl;
 				}
 
 				if (userInput == "Right") {
@@ -180,7 +180,7 @@ std::pair<int, int> user_position(FLOOR_1, ROOM_5);
 				if (userInput == "QUIT")
 					game_over = true;
 
-				if ((userInput != "QUIT") && (userInput != "START") && (userInput != "Retreat") && (userInput != "Fight") && (userInput != "Help") && (userInput != "Right") && (userInput != "Left") && (userInput != "Pickup") && (userInput != "Upstairs") && (userInput != "Downstairs")) {
+				if ((userInput != "QUIT") && (userInput != "START") /* ##PY && (userInput != "Retreat") */ && (userInput != "Fight") && (userInput != "Help") && (userInput != "Right") && (userInput != "Left") && (userInput != "Pickup") && (userInput != "Upstairs") && (userInput != "Downstairs")) {
 					cout << "That is not a command. Type Help to view the list of commands." << endl;
 				}
 
