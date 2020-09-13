@@ -12,11 +12,14 @@ void Lab_3_01::execute()
 
 	int randNum;
 
-	srand(time(NULL));
+	srand((unsigned int) time(NULL)); //## PY cast to unsigned int avoids warning
 	randNum = rand() % 8 + 1;
 
 	cout << "Ask a yes or no question." << endl;
 	cin >> input;
+
+	//## PY I think this is a better way ...
+	cout << Array[(size_t) randNum - 1] << endl;
 
 	if (randNum == 1) {
 		cout << Array[0] << endl;
