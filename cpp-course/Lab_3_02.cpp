@@ -15,17 +15,28 @@ void Lab_3_02::execute()
 
 // Note that here in the cpp file you can't tell if the birthday_song function
 // is public or private. You have to look in the header file.
+//**PY moved the contract for the birthday song down to where is function body is.
+	birthday_song(userName);
+
+	//** Code for Part 2 goes after the array declaration.
+	array<string, 13> deck_of_cards = {"A", "2", "3", "4", "5", "6", "7", "8", "9",
+	"10", "J", "Q", "K"};
+
+//**PY moved the contract for the card_picker down to where is function body is.
+	card_picker(deck_of_cards);
+
+}
+
 /*
 Name: birthday_song
 Purpose: Prints out a personalized birthday song.
 Input: name (string)
 Returns: void
 */
-	birthday_song(userName);
-
-	//** Code for Part 2 goes after the array declaration.
-	array<string, 13> deck_of_cards = {"A", "2", "3", "4", "5", "6", "7", "8", "9",
-	"10", "J", "Q", "K"};
+void Lab_3_02::birthday_song(const string& name) {
+	//** Code goes here
+	cout << "Happy birthday to you!" << endl << "Happy birthday to you!" << endl << "Happy birthday dear " << name << "!" << endl << "Happy birthday to you!" << endl;
+};
 
 /*
 Name: card_picker
@@ -33,16 +44,6 @@ Purpose: Prints out 5 randomized cards.
 Input: deck (array)
 Returns: void
 */
-	card_picker(deck_of_cards);
-
-}
-
-
-void Lab_3_02::birthday_song(const string& name) {
-	//** Code goes here
-	cout << "Happy birthday to you!" << endl << "Happy birthday to you!" << endl << "Happy birthday dear " << name << "!" << endl << "Happy birthday to you!" << endl;
-};
-
 void Lab_3_02::card_picker(const array<string, 13>& deck) {
 	int randNum1;
 	int randNum2;
@@ -51,6 +52,8 @@ void Lab_3_02::card_picker(const array<string, 13>& deck) {
 	int randNum5;
 
 	srand((unsigned int)time(NULL));
+
+	//**PY OK for now. In Unit 4 you'll see that this can be done with a "for" loop.
 	randNum1 = rand() % 13 + 1;
 
 	//srand((unsigned int)time(NULL));
