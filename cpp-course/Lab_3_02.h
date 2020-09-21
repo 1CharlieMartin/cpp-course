@@ -23,5 +23,6 @@ private:
    // from inside the execute() function or from any other private function in
    // class Lab_3_02.
    void birthday_song(const string& name);
+   void card_picker(const array<string, 13>& deck);
 
 };
