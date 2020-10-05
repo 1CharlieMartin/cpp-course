@@ -21,9 +21,9 @@ void Lab_3_03::execute() {
 	int player2Score = 0;
 	
 	
-
 	// Call the standard library algorithm to shuffle the deck.
-	random_shuffle(deck.begin(), deck.end());
+	// deprecated since c++14 random_shuffle(deck.begin(), deck.end());
+	shuffle(deck.begin(), deck.end(), std::default_random_engine(std::random_device()()));
 
 	//** Code goes here
 	cout << "Please enter Player 1's name: " << endl;
