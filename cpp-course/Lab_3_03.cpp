@@ -1,5 +1,4 @@
 #include "Lab_3_03.h"
-#include <random>
 
 
 void Lab_3_03::execute() {
@@ -20,12 +19,9 @@ void Lab_3_03::execute() {
 	string player2Name;
 	int player1Score = 0;
 	int player2Score = 0;
-	int PLAYER1 = 1;
-	int PLAYER2 = 2;
-	int TIE = 0;
-
-
-
+	
+	
+	// Call the standard library algorithm to shuffle the deck.
 	// deprecated since c++14 random_shuffle(deck.begin(), deck.end());
 	shuffle(deck.begin(), deck.end(), std::default_random_engine(std::random_device()()));
 
@@ -41,43 +37,22 @@ void Lab_3_03::execute() {
 		int p1Value = player_turn(player1Name, deck);
 		int p2Value = player_turn(player2Name, deck);
 
-		if (round_winner(p1Value,p2Value) == PLAYER1) {
+		if (p1Value > p2Value) {
 			player1Score++;
 			cout << player1Name << " has won this round!" << endl;
 			cout << player1Name << "'s current score is: " << player1Score << endl;
 			cout << player2Name << "'s current score is: " << player2Score << endl;
 		}
 
-		else if (round_winner(p1Value, p2Value) == PLAYER2) {
+		else if (p2Value > p1Value) {
 			player2Score++;
 			cout << player2Name << " has won this round!" << endl;
 			cout << player1Name << "'s current score is: " << player1Score << endl;
 			cout << player2Name << "'s current score is: " << player2Score << endl;
 		}
 
-		else if(round_winner(p1Value, p2Value) == TIE){
+		else {
 			cout << "Both player's cards have the same value. This is war." << endl;
-
-			while (true) {
-
-				int p1ValueWar = player_turn(player1Name, deck);
-				int p2ValueWar = player_turn(player2Name, deck);
-
-				if (p1ValueWar > p2ValueWar) {
-					player1Score = player1Score + 4;
-					cout << player1Name << " has won the war, +4 points!" << endl;
-					break;
-				}
-
-				else if (p1ValueWar < p2ValueWar) {
-					player2Score = player2Score + 4;
-					cout << player2Name << " has won the war, +4 points!" << endl;
-					break;
-				}
-
-				if (deck.empty())
-					break;
-			}
 		}
 
 		cout << "Remaining cards in deck " << to_string(deck.size()) << endl;
@@ -98,22 +73,6 @@ void Lab_3_03::execute() {
 		cout << endl;
 	}
 }
-
-// round_winner
-// Purpose: determine the winner of the round and return the winner in the form of an int.
-// Arguments:
-// non-const reference to player 1's score for the round (int)
-// non-const reference to player 2's score for the round (int)
-// Returns: int
-int Lab_3_03::round_winner(int& p1value, int& p2value) {
-	if (p1value > p2value)
-		return 1;
-	else if (p2value > p1value)
-		return 2;
-	else if (p1value == p2value)
-		return 0;
-
-};
 
 
 // player_turn
