@@ -46,7 +46,7 @@ private:
 
    int player_turn(const string& player_name, vector<Card>& deck);
 
-   int round_winner(int& p1value, int& p2value);
+   int round_winner(int p1value, int p2value);
 
 };
 

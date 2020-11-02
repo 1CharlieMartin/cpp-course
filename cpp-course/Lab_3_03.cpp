@@ -44,46 +44,58 @@ void Lab_3_03::execute() {
 		if (round_winner(p1Value, p2Value) == PLAYER1) {
 			player1Score++;
 			cout << player1Name << " has won this round!" << endl;
-			cout << player1Name << "'s current score is: " << player1Score << endl;
-			cout << player2Name << "'s current score is: " << player2Score << endl;
+			//** common - see below cout << player1Name << "'s current score is: " << player1Score << endl;
+			//** cout << player2Name << "'s current score is: " << player2Score << endl;
 		}
 
 		else if (round_winner(p1Value, p2Value) == PLAYER2) {
 			player2Score++;
 			cout << player2Name << " has won this round!" << endl;
-			cout << player1Name << "'s current score is: " << player1Score << endl;
-			cout << player2Name << "'s current score is: " << player2Score << endl;
+			//** common - see below cout << player1Name << "'s current score is: " << player1Score << endl;
+			//** cout << player2Name << "'s current score is: " << player2Score << endl;
 		}
 
 		else if (round_winner(p1Value, p2Value) == TIE) {
 			cout << "Both player's cards have the same value. This is war." << endl;
-
+			
+			int spoils = 2; //** new: keep track of spoils
 			while (true) {
 
 				int p1ValueWar = player_turn(player1Name, deck);
 				int p2ValueWar = player_turn(player2Name, deck);
 
 				if (p1ValueWar > p2ValueWar) {
-					player1Score = player1Score + 4;
-					cout << player1Name << " has won the war, +4 points!" << endl;
+					//** was player1Score = player1Score + 4;
+					player1Score = player1Score + 2 + spoils;
+					//** was cout << player1Name << " has won the war, +4 points!" << endl;
+					cout << player1Name << " has won the war, +" + to_string(spoils + 2) + " points!" << endl;
 					break;
 				}
 
 				else if (p1ValueWar < p2ValueWar) {
-					player2Score = player2Score + 4;
-					cout << player2Name << " has won the war, +4 points!" << endl;
+					//** was player2Score = player2Score + 4;
+					player2Score = player2Score + 2 + spoils;
+					//** was cout << player2Name << " has won the war, +4 points!" << endl;
+					cout << player2Name << " has won the war, +" + to_string(spoils + 2) + " points!" << endl;
 					break;
 				}
+
+				spoils += 2; //** new: war continues, add to spoils
 
 				if (deck.empty())
 					break;
 			}
 		}
 
+		cout << player1Name << "'s current score is: " << player1Score << endl; //**common - move here
+		cout << player2Name << "'s current score is: " << player2Score << endl; //** common - move here
 		cout << "Remaining cards in deck " << to_string(deck.size()) << endl;
 
+		//** If you move this code to the right place then you won't need to check deck.empty()
+		//** starting here
 		if ((deck.empty()) && (player1Score > player2Score)) {
 			cout << "THE WINNER OF THE GAME IS " << player1Name << "!!" << endl;
+			//** And you can eliminate this redundancy
 			cout << player1Name << "'s final score was: " << player1Score << endl;
 			cout << player2Name << "'s final score was: " << player2Score << endl;
 		}
@@ -93,6 +105,7 @@ void Lab_3_03::execute() {
 			cout << player1Name << "'s final score was: " << player1Score << endl;
 			cout << player2Name << "'s final score was: " << player2Score << endl;
 		}
+		//** ending here
 
 
 		cout << endl;
@@ -105,14 +118,18 @@ void Lab_3_03::execute() {
 // non-const reference to player 1's score for the round (int)
 // non-const reference to player 2's score for the round (int)
 // Returns: int
-int Lab_3_03::round_winner(int& p1value, int& p2value) {
+//** int& implies that you are changing the caller's value but this is not the case here.
+//** So it is more correct to just use int. Changed the header file also.
+//** was int Lab_3_03::round_winner(int& p1value, int& p2value) {
+int Lab_3_03::round_winner(int p1value, int p2value) {
 	if (p1value > p2value)
 		return 1;
 	else if (p2value > p1value)
 		return 2;
-	else if (p1value == p2value)
-		return 0;
 
+	//** warning C4715: 'Lab_3_03::round_winner': not all control paths return a value
+	//** was else if (p1value == p2value)
+		return 0;
 };
 
 
