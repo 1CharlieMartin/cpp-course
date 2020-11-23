@@ -23,7 +23,7 @@ void Lab_3_03::execute() {
 	int PLAYER1 = 1;
 	int PLAYER2 = 2;
 	int TIE = 0;
-
+	
 
 
 	// deprecated since c++14 random_shuffle(deck.begin(), deck.end());
@@ -62,6 +62,8 @@ void Lab_3_03::execute() {
 			while (true) {
 
 				int p1ValueWar = player_turn(player1Name, deck);
+				if (p1ValueWar == DECKEMPTY)
+					break;
 				int p2ValueWar = player_turn(player2Name, deck);
 
 				if (p1ValueWar > p2ValueWar) {
@@ -82,8 +84,6 @@ void Lab_3_03::execute() {
 
 				spoils += 2; //** new: war continues, add to spoils
 
-				if (deck.empty())
-					break;
 			}
 		}
 
@@ -91,25 +91,23 @@ void Lab_3_03::execute() {
 		cout << player2Name << "'s current score is: " << player2Score << endl; //** common - move here
 		cout << "Remaining cards in deck " << to_string(deck.size()) << endl;
 
-		//** If you move this code to the right place then you won't need to check deck.empty()
-		//** starting here
-		if ((deck.empty()) && (player1Score > player2Score)) {
-			cout << "THE WINNER OF THE GAME IS " << player1Name << "!!" << endl;
-			//** And you can eliminate this redundancy
-			cout << player1Name << "'s final score was: " << player1Score << endl;
-			cout << player2Name << "'s final score was: " << player2Score << endl;
-		}
-
-		if ((deck.empty()) && (player2Score > player1Score)) {
-			cout << "THE WINNER OF THE GAME IS " << player2Name << "!!" << endl;
-			cout << player1Name << "'s final score was: " << player1Score << endl;
-			cout << player2Name << "'s final score was: " << player2Score << endl;
-		}
-		//** ending here
 
 
 		cout << endl;
 	}
+
+
+		if (player1Score > player2Score) {
+			cout << "THE WINNER OF THE GAME IS " << player1Name << "!!" << endl;
+		}
+
+		if (player2Score > player1Score) {
+			cout << "THE WINNER OF THE GAME IS " << player2Name << "!!" << endl;
+		}
+
+		if (player1Score == player2Score)
+			cout << "IT IS A TIE!" << endl;
+	
 }
 
 // round_winner
@@ -142,7 +140,13 @@ int Lab_3_03::round_winner(int p1value, int p2value) {
 // Returns: int
 
 int Lab_3_03::player_turn(const string& player_name, vector<Card>& deck) {
+	
+	if (deck.empty()) {
+		return DECKEMPTY;
+	};
+
 	Card card = deck.back(); // access a card
+
 	deck.pop_back(); // remove the card from the deck
 
 	string playerSuit = card.getSuit();

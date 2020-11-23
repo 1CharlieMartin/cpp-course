@@ -22,6 +22,7 @@ public:
 	void execute();
 
 private:
+	int DECKEMPTY = -1;
     // Notice how the Card class is declared in the private section of the
     // Lab_3_03 class. This means that only functions that belong to
     // Lab_3_03 (either public or private) can use the Card class. In the
