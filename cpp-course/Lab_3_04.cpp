@@ -11,8 +11,7 @@ void Lab_3_04::execute() {
 
 	string player1Name;
 	string player2Name;
-	int player1Score = 0;
-	int player2Score = 0;
+
 
 	// deprecated since c++14 random_shuffle(deck.begin(), deck.end());
 	shuffle(deck.begin(), deck.end(), std::default_random_engine(std::random_device()()));
@@ -42,33 +41,7 @@ void Lab_3_04::execute() {
 
 		else if (round_winner(p1Value, p2Value) == TIE) {
 			//** Move this code into a new function called resolveTie.
-			cout << "Both player's cards have the same value. This is war." << endl;
-
-			int spoils = 2;
-			while (true) {
-
-				//## Since the card deck is a class variable we don't need to pass it as a parameter.
-				// int p1ValueWar = player_turn(player1Name, deck);
-				int p1ValueWar = player_turn(player1Name);
-				if (p1ValueWar == DECKEMPTY)
-					break;
-				int p2ValueWar = player_turn(player2Name);
-
-				if (p1ValueWar > p2ValueWar) {
-					player1Score = player1Score + 2 + spoils;
-					cout << player1Name << " has won the war, +" + to_string(spoils + 2) + " points!" << endl;
-					break;
-				}
-
-				else if (p1ValueWar < p2ValueWar) {
-					player2Score = player2Score + 2 + spoils;
-					cout << player2Name << " has won the war, +" + to_string(spoils + 2) + " points!" << endl;
-					break;
-				}
-
-				spoils += 2; // war continues, add to spoils
-			}
-			//** End of new function resolveTie
+			resolveTie(player1Name, player2Name);
 		}
 
 		cout << player1Name << "'s current score is: " << player1Score << endl;
@@ -152,3 +125,35 @@ string Lab_3_04::Card::getCard() {
 int Lab_3_04::Card::getValue() {
 	return value;
 }
+
+
+void Lab_3_04::resolveTie(const string& player1_name, const string& player2_name) {
+
+	cout << "Both player's cards have the same value. This is war." << endl;
+
+	int spoils = 2;
+	while (true) {
+
+		//## Since the card deck is a class variable we don't need to pass it as a parameter.
+		// int p1ValueWar = player_turn(player1Name, deck);
+		int p1ValueWar = player_turn(player1_name);
+		if (p1ValueWar == DECKEMPTY)
+			break;
+		int p2ValueWar = player_turn(player2_name);
+
+		if (p1ValueWar > p2ValueWar) {
+			player1Score = player1Score + 2 + spoils;
+			cout << player1_name << " has won the war, +" + to_string(spoils + 2) + " points!" << endl;
+			break;
+		}
+
+		else if (p1ValueWar < p2ValueWar) {
+			player2Score = player2Score + 2 + spoils;
+			cout << player2_name << " has won the war, +" + to_string(spoils + 2) + " points!" << endl;
+			break;
+		}
+
+		spoils += 2; // war continues, add to spoils
+	}
+
+};

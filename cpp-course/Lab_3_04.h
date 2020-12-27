@@ -28,6 +28,8 @@ private:
 	static constexpr int PLAYER2 = 2;
 	static constexpr int TIE = 0;
 	static constexpr int DECKEMPTY = -1;
+	int player1Score = 0;
+	int player2Score = 0;
 
 	// Notice how the Card class is declared in the private section of the
 	// Lab_3_04 class. This means that only functions that belong to
@@ -68,5 +70,7 @@ private:
 	int player_turn(const string& player_name);
 
 	int round_winner(int p1value, int p2value);
+
+	void resolveTie(const string& player1_name, const string& player2_name);
 
 };
