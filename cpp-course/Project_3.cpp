@@ -58,7 +58,12 @@ bool Project_3::maybe_rollover_month() {
 	bool rolled_over = false;
 	pair<string, int> current_month = months[month]; // look up current month
 
-	//**PY code goes here
+	if (day > months[month].second) {
+		month++;
+		day = 1;
+		return rolled_over = true;
+	}
+	//if month and day are altered return rolled_over true
 
 	return rolled_over;
 }
@@ -71,7 +76,17 @@ bool Project_3::maybe_rollover_month() {
 //
 // input: pNumDays - an integer number of days.
 void Project_3::advance_game_clock(int pNumDays) {
-	//**PY code goes here
+
+	int daysthisTravel = 0;
+	while (daysthisTravel < pNumDays) {
+		maybe_rollover_month();
+		//random sickness placeholder
+		day++;
+		daysthisTravel++;
+	}
+
+	
+	
 }
 
 //## PY - no need to change.
