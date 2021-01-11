@@ -63,6 +63,10 @@ bool Project_3::maybe_rollover_month() {
 		day = 1;
 		return rolled_over = true;
 	}
+
+	if (month == 13) {
+		month = 1;
+	}
 	//if month and day are altered return rolled_over true
 
 	return rolled_over;
@@ -79,9 +83,10 @@ void Project_3::advance_game_clock(int pNumDays) {
 
 	int daysthisTravel = 0;
 	while (daysthisTravel < pNumDays) {
-		maybe_rollover_month();
+		
 		//random sickness placeholder
 		day++;
+		maybe_rollover_month();
 		daysthisTravel++;
 	}
 
