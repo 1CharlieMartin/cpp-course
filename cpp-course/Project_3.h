@@ -92,11 +92,11 @@ private:
 	// Functions called from the main loop.
 	void handle_travel();
 
-	//void handle_rest();
+	void handle_rest();
 
-	//void handle_hunt();
+	void handle_hunt();
 
-	//void handle_status();
+	void handle_status();
 
 	//void handle_help();
 
@@ -107,15 +107,13 @@ private:
 
 	string date_report();
 
-	//void consume_food();
-
 	//bool random_sickness_occurs();
 
 	//void handle_sickness();
 
 	int miles_remaining();
 
-	//bool game_is_over();
+	bool game_is_over();
 
 	//bool player_wins();
 

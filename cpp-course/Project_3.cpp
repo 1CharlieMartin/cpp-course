@@ -13,19 +13,16 @@ void Project_3::execute() {
 		if (action == "travel" or action == "t")
 			handle_travel();
 		else if (action == "rest" or action == "r")
-			cout << "Not yet implemented." << endl;
-		//handle_rest();
+			handle_rest();
 		else if (action == "hunt" or action == "h")
-			cout << "Not yet implemented." << endl;
-		//handle_hunt();
+			handle_hunt();
 		else if (action == "quit" or action == "q")
 			playing = false;
 		else if (action == "help" or action == "?")
 			cout << "Not yet implemented." << endl;
-		    //handle_help();
+		//handle_help();
 		else if (action == "status" or action == "s")
-			cout << "Not yet implemented." << endl;
-			//handle_status();
+			handle_status();
 		else
 			cout << "'" << action << "' is not a valid action. Try again." << endl;
 	};
@@ -83,15 +80,15 @@ void Project_3::advance_game_clock(int pNumDays) {
 
 	int daysthisTravel = 0;
 	while (daysthisTravel < pNumDays) {
-		
+
 		//random sickness placeholder
 		day++;
 		maybe_rollover_month();
 		daysthisTravel++;
 	}
 
-	
-	
+
+
 }
 
 //## PY - no need to change.
@@ -112,6 +109,27 @@ void Project_3::handle_travel() {
 	cout << "You are now " << to_string(miles_traveled) << " miles from Independence, with " << to_string(miles_remaining()) << " miles remaining." << endl;
 	cout << date_report() << endl;
 }
+
+void Project_3::handle_rest() {
+	//** CODE goes here
+	//** requires a random number
+}
+
+void Project_3::handle_hunt() {
+	//** CODE goes here
+	//** requires a random number
+}
+
+void Project_3::handle_status() {
+	//** CODE goes here
+}
+
+bool Project_3::game_is_over() {
+	//** CODE goes here
+
+	return false; //** TEMP
+}
+
 
 
 
