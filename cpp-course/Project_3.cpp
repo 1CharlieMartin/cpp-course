@@ -82,6 +82,7 @@ void Project_3::advance_game_clock(int pNumDays) {
 	while (daysthisTravel < pNumDays) {
 
 		//random sickness placeholder
+		food_remaining = food_remaining - 5;
 		day++;
 		maybe_rollover_month();
 		daysthisTravel++;
@@ -111,13 +112,48 @@ void Project_3::handle_travel() {
 }
 
 void Project_3::handle_rest() {
-	//** CODE goes here
-	//** requires a random number
+	// Increase player's health level by 1
+	bool healthLevelIncreased = false;
+	if (health_level < 5) {
+		health_level++;
+		healthLevelIncreased = true;
+	}
+
+
+	// Take up random amount of days
+	std::default_random_engine generator(std::random_device{}());;
+	std::uniform_int_distribution<int> randDays(MIN_DAYS_PER_REST, MAX_DAYS_PER_REST);
+	int days_this_rest = randDays(generator);
+
+
+
+	advance_game_clock(days_this_rest);
+
+	if (healthLevelIncreased == true) {
+		cout << "Your health level has been increased by 1 point and it is now " << health_level << ". You rested for  " << days_this_rest << " days." << endl;
+		cout << date_report() << endl;
+	}
+
+	else {
+		cout << "Your health level was the maximum (5) so it has not been increased. You rested for " << days_this_rest << " days." << endl;
+		cout << date_report() << endl;
+	}
 }
 
 void Project_3::handle_hunt() {
-	//** CODE goes here
-	//** requires a random number
+	// Add 100lbs of food
+	food_remaining = food_remaining + 100;
+	
+	// Take up random amount of days
+	std::default_random_engine generator(std::random_device{}());;
+	std::uniform_int_distribution<int> randDays(MIN_DAYS_PER_HUNT, MAX_DAYS_PER_HUNT);
+	int days_this_hunt = randDays(generator);
+	
+
+	advance_game_clock(days_this_hunt);
+
+	cout << "Your food supply has been increased by 100lbs. The hunt took up " << days_this_hunt << " days." << endl;
+	cout << date_report() << endl;
 }
 
 void Project_3::handle_status() {
