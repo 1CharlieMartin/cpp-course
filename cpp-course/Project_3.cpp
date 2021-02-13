@@ -17,7 +17,7 @@ void Project_3::execute() {
 		else if (action == "hunt" or action == "h")
 			handle_hunt();
 		else if (action == "quit" or action == "q")
-			playing = false;
+			game_is_over(); //playing = false;
 		else if (action == "help" or action == "?")
 			cout << "Not yet implemented." << endl;
 		//handle_help();
@@ -77,12 +77,12 @@ bool Project_3::maybe_rollover_month() {
 //
 // input: pNumDays - an integer number of days.
 void Project_3::advance_game_clock(int pNumDays) {
-
+	pair<string, int> current_month = months[month]; // look up current month
 	int daysthisTravel = 0;
 	while (daysthisTravel < pNumDays) {
 
 		//random sickness placeholder
-		food_remaining = food_remaining - 5;
+
 		day++;
 		maybe_rollover_month();
 		daysthisTravel++;
@@ -104,6 +104,16 @@ void Project_3::handle_travel() {
 	std::uniform_int_distribution<int> days_this_travel(MIN_DAYS_PER_TRAVEL, MAX_DAYS_PER_TRAVEL);
 	int random_travel = days_this_travel(generator);
 
+	food_remaining = food_remaining - 5;
+	if (food_remaining <= 0 || health_level <= 0 || (month == 12 && day == 31)) {
+		cout << "You lost!" << endl;
+		game_is_over();
+	}
+	if (miles_traveled == TOTAL_MILES_TO_OREGON) {
+		cout << "You Won!!!!" << endl;
+		game_is_over();
+	}
+	
 	advance_game_clock(random_travel);
 
 	cout << "You have traveled for " << to_string(random_travel) << " days and have covered " << to_string(miles_this_travel) << " miles." << endl;
@@ -157,12 +167,16 @@ void Project_3::handle_hunt() {
 }
 
 void Project_3::handle_status() {
-	//** CODE goes here
+	cout << "Food: " << to_string(food_remaining) << endl;
+	cout << "Health Level: " << to_string(health_level) << endl;
+	cout << "Total Distance Traveled: " << to_string(miles_traveled) << endl;
+	cout << date_report() << endl;
 }
 
 bool Project_3::game_is_over() {
-	//** CODE goes here
-
+	
+	playing = false;
+	cout << "GAME OVER" << endl;
 	return false; //** TEMP
 }
 
