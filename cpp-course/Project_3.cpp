@@ -17,7 +17,7 @@ void Project_3::execute() {
 		else if (action == "hunt" or action == "h")
 			handle_hunt();
 		else if (action == "quit" or action == "q")
-			game_is_over(); //playing = false;
+			playing = false;
 		else if (action == "help" or action == "?")
 			cout << "Not yet implemented." << endl;
 		//handle_help();
@@ -25,6 +25,7 @@ void Project_3::execute() {
 			handle_status();
 		else
 			cout << "'" << action << "' is not a valid action. Try again." << endl;
+		playing = game_is_over();
 	};
 
 }
@@ -52,21 +53,15 @@ int Project_3::miles_remaining() {
 // and causes the month to wrap around if it crosses into the next year.
 // Returns true if the class variables month and day were altered.
 bool Project_3::maybe_rollover_month() {
-	bool rolled_over = false;
 	pair<string, int> current_month = months[month]; // look up current month
 
 	if (day > months[month].second) {
 		month++;
 		day = 1;
-		return rolled_over = true;
+		return true;
 	}
 
-	if (month == 13) {
-		month = 1;
-	}
-	//if month and day are altered return rolled_over true
-
-	return rolled_over;
+	return false;
 }
 
 // Causes a certain number of travel days to elapse. The days pass
@@ -83,13 +78,11 @@ void Project_3::advance_game_clock(int pNumDays) {
 
 		//random sickness placeholder
 
+		// if 12/31 return;
 		day++;
 		maybe_rollover_month();
 		daysthisTravel++;
 	}
-
-
-
 }
 
 //## PY - no need to change.
@@ -103,16 +96,6 @@ void Project_3::handle_travel() {
 	// Travel for a random number of days.
 	std::uniform_int_distribution<int> days_this_travel(MIN_DAYS_PER_TRAVEL, MAX_DAYS_PER_TRAVEL);
 	int random_travel = days_this_travel(generator);
-
-	food_remaining = food_remaining - 5;
-	if (food_remaining <= 0 || health_level <= 0 || (month == 12 && day == 31)) {
-		cout << "You lost!" << endl;
-		game_is_over();
-	}
-	if (miles_traveled == TOTAL_MILES_TO_OREGON) {
-		cout << "You Won!!!!" << endl;
-		game_is_over();
-	}
 	
 	advance_game_clock(random_travel);
 
@@ -134,8 +117,6 @@ void Project_3::handle_rest() {
 	std::default_random_engine generator(std::random_device{}());;
 	std::uniform_int_distribution<int> randDays(MIN_DAYS_PER_REST, MAX_DAYS_PER_REST);
 	int days_this_rest = randDays(generator);
-
-
 
 	advance_game_clock(days_this_rest);
 
@@ -175,9 +156,19 @@ void Project_3::handle_status() {
 
 bool Project_3::game_is_over() {
 	
-	playing = false;
-	cout << "GAME OVER" << endl;
-	return false; //** TEMP
+	if (health_level < 1 || ((month == 12 && day == 31) && miles_traveled <= 0)) {
+		cout << "You lost!" << endl;
+		handle_status();
+		return true;
+	}
+
+	if (miles_traveled >= TOTAL_MILES_TO_OREGON) {
+		cout << "You Won!!!!" << endl;
+		handle_status();
+		return true;
+	}
+
+	return false;
 }
 
 
