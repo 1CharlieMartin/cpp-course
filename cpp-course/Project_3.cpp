@@ -24,7 +24,7 @@ void Project_3::execute() {
 			handle_status();
 		else
 			cout << "'" << action << "' is not a valid action. Try again." << endl;
-		playing = game_is_over();
+		playing = !game_is_over();
 	};
 
 }
