@@ -98,7 +98,7 @@ private:
 
 	void handle_status();
 
-	//void handle_help();
+	void handle_help();
 
 	// Helper functions.
 	void advance_game_clock(int pNumDays);

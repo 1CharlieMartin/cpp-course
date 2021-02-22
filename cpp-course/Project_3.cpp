@@ -19,8 +19,7 @@ void Project_3::execute() {
 		else if (action == "quit" or action == "q")
 			playing = false;
 		else if (action == "help" or action == "?")
-			cout << "Not yet implemented." << endl;
-		//handle_help();
+			handle_help();
 		else if (action == "status" or action == "s")
 			handle_status();
 		else
@@ -78,7 +77,8 @@ void Project_3::advance_game_clock(int pNumDays) {
 
 		//random sickness placeholder
 
-		// if 12/31 return;
+		if (month == 12 && day == 31)
+			return;
 		day++;
 		maybe_rollover_month();
 		daysthisTravel++;
@@ -156,7 +156,7 @@ void Project_3::handle_status() {
 
 bool Project_3::game_is_over() {
 	
-	if (health_level < 1 || ((month == 12 && day == 31) && miles_traveled <= 0)) {
+	if (health_level < 1 || ((month == 12 && day == 31) && miles_traveled < TOTAL_MILES_TO_OREGON)) {
 		cout << "You lost!" << endl;
 		handle_status();
 		return true;
@@ -169,6 +169,10 @@ bool Project_3::game_is_over() {
 	}
 
 	return false;
+}
+
+void Project_3::handle_help() {
+	cout << help_text << endl;
 }
 
 
