@@ -2,6 +2,8 @@
 
 void Project_3::execute() {
 
+	//** choose two random days for the first month
+
 	cout << "Please enter the player's name: ";
 	cin >> player_name;
 
@@ -17,14 +19,14 @@ void Project_3::execute() {
 		else if (action == "hunt" or action == "h")
 			handle_hunt();
 		else if (action == "quit" or action == "q")
-			playing = false;
+			quit = true;
 		else if (action == "help" or action == "?")
 			handle_help();
 		else if (action == "status" or action == "s")
 			handle_status();
 		else
 			cout << "'" << action << "' is not a valid action. Try again." << endl;
-		playing = game_is_over();
+		playing = !game_is_over();
 	};
 
 }
@@ -56,11 +58,29 @@ bool Project_3::maybe_rollover_month() {
 
 	if (day > months[month].second) {
 		month++;
+		if (month > 12) // sanity check
+			throw logic_error("Month illegally exceeded 12");
+
 		day = 1;
+		//** choose two random days for the next month
+		//** make a function to do this
+		//** void setSickDays();
+
 		return true;
 	}
 
 	return false;
+}
+
+bool Project_3::random_sickness_occurs() {
+	//** CODE goes here
+}
+
+void Project_3::set_sick_days() {
+	//** CODE goes here
+	// Need two random numbers between 1 and the number of days in the current month 
+	// but they can't be the same.
+	// set sick_days.first and sick_days.second
 }
 
 // Causes a certain number of travel days to elapse. The days pass
@@ -75,10 +95,13 @@ void Project_3::advance_game_clock(int pNumDays) {
 	int daysthisTravel = 0;
 	while (daysthisTravel < pNumDays) {
 
+		food_remaining -= 5; // eat
+
 		//random sickness placeholder
 
 		if (month == 12 && day == 31)
 			return;
+
 		day++;
 		maybe_rollover_month();
 		daysthisTravel++;
@@ -156,7 +179,12 @@ void Project_3::handle_status() {
 
 bool Project_3::game_is_over() {
 	
-	if (health_level < 1 || ((month == 12 && day == 31) && miles_traveled < TOTAL_MILES_TO_OREGON)) {
+	if (quit) {
+		cout << player_name << ", you loser. You quit before the game was done!!" << endl;
+		return true;
+	}
+
+	if (health_level < 1 || food_remaining <= 0 || ((month == 12 && day == 31) && miles_traveled < TOTAL_MILES_TO_OREGON)) {
 		cout << "You lost!" << endl;
 		handle_status();
 		return true;
