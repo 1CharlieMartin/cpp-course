@@ -45,11 +45,13 @@ private:
 	int miles_traveled = 0;
 	int food_remaining = 500;
 	int health_level = 5;
+	pair<int, int> sick_days;
 	int month = 3;
 	int day = 1;
 	int sicknesses_suffered_this_month = 0;
 	string player_name;
 	bool playing = true;
+	bool quit = false;
 
 	// Months and the number of days in each month. Put a dummy entry in location 0 so that
 	// we can use the number of the month as the index into the array. Since we don't know
@@ -107,14 +109,14 @@ private:
 
 	string date_report();
 
-	//bool random_sickness_occurs();
+	bool random_sickness_occurs();
 
 	//void handle_sickness();
+
+	void set_sick_days();
 
 	int miles_remaining();
 
 	bool game_is_over();
-
-	//bool player_wins();
 
 };
