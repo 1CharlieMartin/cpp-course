@@ -12,8 +12,10 @@ void Project_3::execute() {
 		cout << endl << "Choose an action, " << player_name << ": ";
 		string action;
 		cin >> action;
-		if (action == "travel" or action == "t")
+		if (action == "travel" or action == "t") {
 			handle_travel();
+			set_sick_days();
+		}
 		else if (action == "rest" or action == "r")
 			handle_rest();
 		else if (action == "hunt" or action == "h")
@@ -72,15 +74,28 @@ bool Project_3::maybe_rollover_month() {
 	return false;
 }
 
-bool Project_3::random_sickness_occurs() {
+//bool Project_3::random_sickness_occurs() {
 	//** CODE goes here
-}
+//}
 
 void Project_3::set_sick_days() {
 	//** CODE goes here
 	// Need two random numbers between 1 and the number of days in the current month 
 	// but they can't be the same.
 	// set sick_days.first and sick_days.second
+	std::default_random_engine generator(std::random_device{}());;
+	std::uniform_int_distribution<int> sickday(1, months[month].second);
+	int sick_day_1 = sickday(generator);
+	while (loop) {
+		std::default_random_engine generator(std::random_device{}());;
+		std::uniform_int_distribution<int> sickday(1, months[month].second);
+		sick_day_2 = sickday(generator);
+
+		if (sick_day_1 != sick_day_2) {
+			loop = false;
+		}
+	}
+	cout << "1: " << sick_day_1 << "   2: " << sick_day_2 << endl;
 }
 
 // Causes a certain number of travel days to elapse. The days pass
