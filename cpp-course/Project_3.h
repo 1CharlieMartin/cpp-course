@@ -53,7 +53,6 @@ private:
 	bool playing = true;
 	bool quit = false;
 	bool loop = true;
-	int sick_day_2;
 
 
 	// Months and the number of days in each month. Put a dummy entry in location 0 so that

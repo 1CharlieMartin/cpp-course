@@ -83,20 +83,15 @@ void Project_3::set_sick_days() {
 	// Need two random numbers between 1 and the number of days in the current month 
 	// but they can't be the same.
 	// set sick_days.first and sick_days.second
-	std::default_random_engine generator(std::random_device{}());;
-	std::uniform_int_distribution<int> sickday(1, months[month].second);
-	int sick_day_1 = sickday(generator);
-	while (loop) {
-		std::default_random_engine generator(std::random_device{}());;
-		std::uniform_int_distribution<int> sickday(1, months[month].second);
-		sick_day_2 = sickday(generator);
-
-		if (sick_day_1 != sick_day_2) {
-			loop = false;
-		}
+	std::default_random_engine generator2(std::random_device{}());;
+	std::uniform_int_distribution<int> sickday(1, (months[month].second)/2);
+	sick_days.first = sickday(generator2);
+	
+	std::default_random_engine generator3(std::random_device{}());;
+	std::uniform_int_distribution<int> sickday2((((months[month].second) / 2) + 1), months[month].second);
+	sick_days.second = sickday2(generator3);
 	}
-	cout << "1: " << sick_day_1 << "   2: " << sick_day_2 << endl;
-}
+	
 
 // Causes a certain number of travel days to elapse. The days pass
 // pass one at a time; this function calls the helper function
@@ -113,6 +108,10 @@ void Project_3::advance_game_clock(int pNumDays) {
 		food_remaining -= 5; // eat
 
 		//random sickness placeholder
+		if (day == sick_days.first || day == sick_days.second) {
+			health_level--;
+			cout << "You got sick. Your health level has been decreased by one point." << endl;
+		}
 
 		if (month == 12 && day == 31)
 			return;
