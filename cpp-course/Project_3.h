@@ -107,11 +107,9 @@ private:
 	// Helper functions.
 	void advance_game_clock(int pNumDays);
 
-	bool maybe_rollover_month();
+	void maybe_rollover_month();
 
 	string date_report();
-
-	bool random_sickness_occurs();
 
 	//void handle_sickness();
 

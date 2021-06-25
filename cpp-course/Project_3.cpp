@@ -2,7 +2,7 @@
 
 void Project_3::execute() {
 
-	//** choose two random days for the first month
+	set_sick_days();
 
 	cout << "Please enter the player's name: ";
 	cin >> player_name;
@@ -55,7 +55,7 @@ int Project_3::miles_remaining() {
 // days in the month. If this happens, this function also adjusts the current day
 // and causes the month to wrap around if it crosses into the next year.
 // Returns true if the class variables month and day were altered.
-bool Project_3::maybe_rollover_month() {
+void Project_3::maybe_rollover_month() {
 	pair<string, int> current_month = months[month]; // look up current month
 
 	if (day > months[month].second) {
@@ -64,22 +64,18 @@ bool Project_3::maybe_rollover_month() {
 			throw logic_error("Month illegally exceeded 12");
 
 		day = 1;
-		//** choose two random days for the next month
-		//** make a function to do this
-		//** void setSickDays();
 
-		return true;
+		set_sick_days();
+
+		return;
 	}
 
-	return false;
+	return;
 }
 
-//bool Project_3::random_sickness_occurs() {
-	//** CODE goes here
-//}
+
 
 void Project_3::set_sick_days() {
-	//** CODE goes here
 	// Need two random numbers between 1 and the number of days in the current month 
 	// but they can't be the same.
 	// set sick_days.first and sick_days.second
@@ -107,7 +103,7 @@ void Project_3::advance_game_clock(int pNumDays) {
 
 		food_remaining -= 5; // eat
 
-		//random sickness placeholder
+		//random sickness
 		if (day == sick_days.first || day == sick_days.second) {
 			health_level--;
 			cout << "You got sick. Your health level has been decreased by one point." << endl;
