@@ -14,7 +14,7 @@ void Project_3::execute() {
 		cin >> action;
 		if (action == "travel" or action == "t") {
 			handle_travel();
-			set_sick_days();
+			//set_sick_days();
 		}
 		else if (action == "rest" or action == "r")
 			handle_rest();
@@ -154,7 +154,7 @@ void Project_3::handle_rest() {
 	advance_game_clock(days_this_rest);
 
 	if (healthLevelIncreased == true) {
-		cout << "Your health level has been increased by 1 point and it is now " << health_level << ". You rested for  " << days_this_rest << " days." << endl;
+		cout << "Your health level has been increased and it is now " << health_level << ". You rested for  " << days_this_rest << " days." << endl;
 		cout << date_report() << endl;
 	}
 
