@@ -154,7 +154,7 @@ void Project_3::handle_rest() {
 	advance_game_clock(days_this_rest);
 
 	if (healthLevelIncreased == true) {
-		cout << "Your health level has been increased and it is now " << health_level << ". You rested for  " << days_this_rest << " days." << endl;
+		cout << "Resting raised your health level by one, but you could've gotten sick while resting. Your health level is " << health_level << ". You rested for  " << days_this_rest << " days." << endl;
 		cout << date_report() << endl;
 	}
 
