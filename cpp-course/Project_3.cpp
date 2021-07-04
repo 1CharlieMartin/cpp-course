@@ -7,15 +7,13 @@ void Project_3::execute() {
 	cout << "Please enter the player's name: ";
 	cin >> player_name;
 
-	// handle_status();
+	// handle_status(); //** uncomment or remove
 	while (playing) {
 		cout << endl << "Choose an action, " << player_name << ": ";
 		string action;
 		cin >> action;
-		if (action == "travel" or action == "t") {
+		if (action == "travel" or action == "t")
 			handle_travel();
-			//set_sick_days();
-		}
 		else if (action == "rest" or action == "r")
 			handle_rest();
 		else if (action == "hunt" or action == "h")
@@ -47,6 +45,7 @@ string Project_3::date_report() {
 	return "Today is " + months[month].first + " " + to_string(day);
 }
 
+//** This function is only called once. Remove and do the calculation inline.
 int Project_3::miles_remaining() {
 	return TOTAL_MILES_TO_OREGON - miles_traveled;
 }
@@ -55,7 +54,9 @@ int Project_3::miles_remaining() {
 // days in the month. If this happens, this function also adjusts the current day
 // and causes the month to wrap around if it crosses into the next year.
 // Returns true if the class variables month and day were altered.
+//** Review 2 return statements - needed?
 void Project_3::maybe_rollover_month() {
+	//** Is the next variable used?
 	pair<string, int> current_month = months[month]; // look up current month
 
 	if (day > months[month].second) {
@@ -78,27 +79,28 @@ void Project_3::maybe_rollover_month() {
 void Project_3::set_sick_days() {
 	// Need two random numbers between 1 and the number of days in the current month 
 	// but they can't be the same.
-	// set sick_days.first and sick_days.second
-	std::default_random_engine generator2(std::random_device{}());;
+	std::default_random_engine generator2(std::random_device{}());
 	std::uniform_int_distribution<int> sickday(1, (months[month].second)/2);
-	sick_days.first = sickday(generator2);
+	sick_days.first = sickday(generator2); // first sick day
 	
-	std::default_random_engine generator3(std::random_device{}());;
+	std::default_random_engine generator3(std::random_device{}()); //** is this needed?
 	std::uniform_int_distribution<int> sickday2((((months[month].second) / 2) + 1), months[month].second);
-	sick_days.second = sickday2(generator3);
+	sick_days.second = sickday2(generator3); // second sick day
 	}
 	
 
 // Causes a certain number of travel days to elapse. The days pass
 // pass one at a time; this function calls the helper function
 // maybe_rollover_month to keep the travel calendar on track.
-// [**PY placeholder] each day brings with it a random chance
-// of sickness. 
+// Each day brings with it a random chance of sickness. 
 //
 // input: pNumDays - an integer number of days.
 void Project_3::advance_game_clock(int pNumDays) {
+	//** Is the next variable used?
 	pair<string, int> current_month = months[month]; // look up current month
 	int daysthisTravel = 0;
+
+	//** cout << "You started traveling on " ...
 	while (daysthisTravel < pNumDays) {
 
 		food_remaining -= 5; // eat
@@ -106,7 +108,8 @@ void Project_3::advance_game_clock(int pNumDays) {
 		//random sickness
 		if (day == sick_days.first || day == sick_days.second) {
 			health_level--;
-			cout << "You got sick. Your health level has been decreased by one point." << endl;
+			//** cout << "You got sick on " 
+			cout << "Your health level has been decreased by one point." << endl;
 		}
 
 		if (month == 12 && day == 31)
@@ -118,15 +121,15 @@ void Project_3::advance_game_clock(int pNumDays) {
 	}
 }
 
-//## PY - no need to change.
+// Travel for a random number of miles and a random number of days.
 void Project_3::handle_travel() {
-	// Travel a random number of miles.
+	// Random miles.
 	std::default_random_engine generator(std::random_device{}());;
 	std::uniform_int_distribution<int> miles(MIN_MILES_PER_TRAVEL, MAX_MILES_PER_TRAVEL);
 	int miles_this_travel = miles(generator);
 	miles_traveled = min(miles_traveled + miles_this_travel, TOTAL_MILES_TO_OREGON);
 
-	// Travel for a random number of days.
+	// Random days.
 	std::uniform_int_distribution<int> days_this_travel(MIN_DAYS_PER_TRAVEL, MAX_DAYS_PER_TRAVEL);
 	int random_travel = days_this_travel(generator);
 	
@@ -137,43 +140,42 @@ void Project_3::handle_travel() {
 	cout << date_report() << endl;
 }
 
+// Rest for a random number of days.
 void Project_3::handle_rest() {
 	// Increase player's health level by 1
 	bool healthLevelIncreased = false;
 	if (health_level < 5) {
 		health_level++;
-		healthLevelIncreased = true;
+		cout << "Resting raised your health level by one to " << health_level << endl;
+	}
+	else {
+		cout << "Your health level was the maximum (5) so it has not been increased." << endl;
 	}
 
-
-	// Take up random amount of days
 	std::default_random_engine generator(std::random_device{}());;
 	std::uniform_int_distribution<int> randDays(MIN_DAYS_PER_REST, MAX_DAYS_PER_REST);
 	int days_this_rest = randDays(generator);
 
+	int health_level_before = health_level;
 	advance_game_clock(days_this_rest);
+	int health_level_after = health_level;
 
-	if (healthLevelIncreased == true) {
-		cout << "Resting raised your health level by one, but you could've gotten sick while resting. Your health level is " << health_level << ". You rested for  " << days_this_rest << " days." << endl;
-		cout << date_report() << endl;
-	}
-
-	else {
-		cout << "Your health level was the maximum (5) so it has not been increased. You rested for " << days_this_rest << " days." << endl;
-		cout << date_report() << endl;
-	}
+	if (health_level_before == health_level_after)
+		cout << "Traveling did not decrease your health level of " << health_level_before << endl;
+	else
+		cout << "You got sick while resting. Your health level now is " << health_level << endl;
+	cout << date_report() << endl;
 }
 
+// Hunt for a random number of days.
 void Project_3::handle_hunt() {
 	// Add 100lbs of food
-	food_remaining = food_remaining + 100;
+	food_remaining += 100;
 	
-	// Take up random amount of days
 	std::default_random_engine generator(std::random_device{}());;
 	std::uniform_int_distribution<int> randDays(MIN_DAYS_PER_HUNT, MAX_DAYS_PER_HUNT);
 	int days_this_hunt = randDays(generator);
 	
-
 	advance_game_clock(days_this_hunt);
 
 	cout << "Your food supply has been increased by 100lbs. The hunt took up " << days_this_hunt << " days." << endl;
