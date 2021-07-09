@@ -111,11 +111,7 @@ private:
 
 	string date_report();
 
-	//void handle_sickness();
-
 	void set_sick_days();
-
-	int miles_remaining();
 
 	bool game_is_over();
 

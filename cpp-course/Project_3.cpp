@@ -7,7 +7,7 @@ void Project_3::execute() {
 	cout << "Please enter the player's name: ";
 	cin >> player_name;
 
-	// handle_status(); //** uncomment or remove
+	handle_status();
 	while (playing) {
 		cout << endl << "Choose an action, " << player_name << ": ";
 		string action;
@@ -45,20 +45,13 @@ string Project_3::date_report() {
 	return "Today is " + months[month].first + " " + to_string(day);
 }
 
-//** This function is only called once. Remove and do the calculation inline.
-int Project_3::miles_remaining() {
-	return TOTAL_MILES_TO_OREGON - miles_traveled;
-}
+
 
 // Rolls over to the next month when the current day is larger than the number of
 // days in the month. If this happens, this function also adjusts the current day
 // and causes the month to wrap around if it crosses into the next year.
 // Returns true if the class variables month and day were altered.
-//** Review 2 return statements - needed?
 void Project_3::maybe_rollover_month() {
-	//** Is the next variable used?
-	pair<string, int> current_month = months[month]; // look up current month
-
 	if (day > months[month].second) {
 		month++;
 		if (month > 12) // sanity check
@@ -67,8 +60,6 @@ void Project_3::maybe_rollover_month() {
 		day = 1;
 
 		set_sick_days();
-
-		return;
 	}
 
 	return;
@@ -83,9 +74,8 @@ void Project_3::set_sick_days() {
 	std::uniform_int_distribution<int> sickday(1, (months[month].second)/2);
 	sick_days.first = sickday(generator2); // first sick day
 	
-	std::default_random_engine generator3(std::random_device{}()); //** is this needed?
 	std::uniform_int_distribution<int> sickday2((((months[month].second) / 2) + 1), months[month].second);
-	sick_days.second = sickday2(generator3); // second sick day
+	sick_days.second = sickday2(generator2); // second sick day
 	}
 	
 
@@ -96,11 +86,9 @@ void Project_3::set_sick_days() {
 //
 // input: pNumDays - an integer number of days.
 void Project_3::advance_game_clock(int pNumDays) {
-	//** Is the next variable used?
-	pair<string, int> current_month = months[month]; // look up current month
 	int daysthisTravel = 0;
 
-	//** cout << "You started traveling on " ...
+	cout << "You started traveling on " << months[month].first + " " + to_string(day) + "." << endl;
 	while (daysthisTravel < pNumDays) {
 
 		food_remaining -= 5; // eat
@@ -108,7 +96,7 @@ void Project_3::advance_game_clock(int pNumDays) {
 		//random sickness
 		if (day == sick_days.first || day == sick_days.second) {
 			health_level--;
-			//** cout << "You got sick on " 
+			cout << "You got sick on " << months[month].first + " " + to_string(day) + "." << endl;
 			cout << "Your health level has been decreased by one point." << endl;
 		}
 
@@ -136,7 +124,7 @@ void Project_3::handle_travel() {
 	advance_game_clock(random_travel);
 
 	cout << "You have traveled for " << to_string(random_travel) << " days and have covered " << to_string(miles_this_travel) << " miles." << endl;
-	cout << "You are now " << to_string(miles_traveled) << " miles from Independence, with " << to_string(miles_remaining()) << " miles remaining." << endl;
+	cout << "You are now " << to_string(miles_traveled) << " miles from Independence, with " << to_string(TOTAL_MILES_TO_OREGON - miles_traveled) << " miles remaining." << endl;
 	cout << date_report() << endl;
 }
 
