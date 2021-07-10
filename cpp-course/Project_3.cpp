@@ -46,7 +46,7 @@ string Project_3::date_report() {
 }
 
 
-
+//** Is this comment correct?
 // Rolls over to the next month when the current day is larger than the number of
 // days in the month. If this happens, this function also adjusts the current day
 // and causes the month to wrap around if it crosses into the next year.
@@ -58,15 +58,14 @@ void Project_3::maybe_rollover_month() {
 			throw logic_error("Month illegally exceeded 12");
 
 		day = 1;
-
 		set_sick_days();
 	}
 
-	return;
+	return; //** don't need; return statement is redundant in a void function
 }
 
 
-
+//** Need leading comment
 void Project_3::set_sick_days() {
 	// Need two random numbers between 1 and the number of days in the current month 
 	// but they can't be the same.
@@ -79,6 +78,7 @@ void Project_3::set_sick_days() {
 	}
 	
 
+//** Note what happens on 12/31?
 // Causes a certain number of travel days to elapse. The days pass
 // pass one at a time; this function calls the helper function
 // maybe_rollover_month to keep the travel calendar on track.
@@ -97,7 +97,7 @@ void Project_3::advance_game_clock(int pNumDays) {
 		if (day == sick_days.first || day == sick_days.second) {
 			health_level--;
 			cout << "You got sick on " << months[month].first + " " + to_string(day) + "." << endl;
-			cout << "Your health level has been decreased by one point." << endl;
+			cout << "Your health level has been decreased by one point." << endl; //** to what level?
 		}
 
 		if (month == 12 && day == 31)
@@ -184,6 +184,8 @@ bool Project_3::game_is_over() {
 		return true;
 	}
 
+	//** Split up this statement to make it clear to the user why he lost in each case.
+	//** For example, "You lost because your health level went to 0"
 	if (health_level < 1 || food_remaining <= 0 || ((month == 12 && day == 31) && miles_traveled < TOTAL_MILES_TO_OREGON)) {
 		cout << "You lost!" << endl;
 		handle_status();
