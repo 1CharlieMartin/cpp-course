@@ -46,11 +46,9 @@ string Project_3::date_report() {
 }
 
 
-//** Is this comment correct?
 // Rolls over to the next month when the current day is larger than the number of
 // days in the month. If this happens, this function also adjusts the current day
 // and causes the month to wrap around if it crosses into the next year.
-// Returns true if the class variables month and day were altered.
 void Project_3::maybe_rollover_month() {
 	if (day > months[month].second) {
 		month++;
@@ -61,11 +59,11 @@ void Project_3::maybe_rollover_month() {
 		set_sick_days();
 	}
 
-	return; //** don't need; return statement is redundant in a void function
 }
 
 
-//** Need leading comment
+// Chooses 2 days (1 from each half of the month) randomly to be sick days.
+// Stores these days in the sick_days pair
 void Project_3::set_sick_days() {
 	// Need two random numbers between 1 and the number of days in the current month 
 	// but they can't be the same.
@@ -78,17 +76,17 @@ void Project_3::set_sick_days() {
 	}
 	
 
-//** Note what happens on 12/31?
 // Causes a certain number of travel days to elapse. The days pass
 // pass one at a time; this function calls the helper function
 // maybe_rollover_month to keep the travel calendar on track.
 // Each day brings with it a random chance of sickness. 
-//
+// If it's 12/31, day and daysthisTravel don't increase; maybe_rollover_month won't get called.
 // input: pNumDays - an integer number of days.
 void Project_3::advance_game_clock(int pNumDays) {
 	int daysthisTravel = 0;
-
-	cout << "You started traveling on " << months[month].first + " " + to_string(day) + "." << endl;
+	travelStartMonth = months[month].first;
+	travelStartDay = to_string(day);
+	cout << "You started traveling on " << travelStartMonth + " " + travelStartDay + "." << endl; 
 	while (daysthisTravel < pNumDays) {
 
 		food_remaining -= 5; // eat
@@ -97,7 +95,7 @@ void Project_3::advance_game_clock(int pNumDays) {
 		if (day == sick_days.first || day == sick_days.second) {
 			health_level--;
 			cout << "You got sick on " << months[month].first + " " + to_string(day) + "." << endl;
-			cout << "Your health level has been decreased by one point." << endl; //** to what level?
+			cout << "Your health level has been decreased to " << health_level << "." << endl; 
 		}
 
 		if (month == 12 && day == 31)
@@ -125,6 +123,7 @@ void Project_3::handle_travel() {
 
 	cout << "You have traveled for " << to_string(random_travel) << " days and have covered " << to_string(miles_this_travel) << " miles." << endl;
 	cout << "You are now " << to_string(miles_traveled) << " miles from Independence, with " << to_string(TOTAL_MILES_TO_OREGON - miles_traveled) << " miles remaining." << endl;
+
 	cout << date_report() << endl;
 }
 
@@ -152,6 +151,8 @@ void Project_3::handle_rest() {
 		cout << "Traveling did not decrease your health level of " << health_level_before << endl;
 	else
 		cout << "You got sick while resting. Your health level now is " << health_level << endl;
+
+	cout << "Starting on " << travelStartMonth << " " + travelStartDay << " you traveled for " << days_this_rest << " days." << endl;
 	cout << date_report() << endl;
 }
 
@@ -184,10 +185,21 @@ bool Project_3::game_is_over() {
 		return true;
 	}
 
-	//** Split up this statement to make it clear to the user why he lost in each case.
-	//** For example, "You lost because your health level went to 0"
-	if (health_level < 1 || food_remaining <= 0 || ((month == 12 && day == 31) && miles_traveled < TOTAL_MILES_TO_OREGON)) {
-		cout << "You lost!" << endl;
+
+	if (health_level < 1 ) {
+		cout << "You lost because your health level went to 0." << endl;
+		handle_status();
+		return true;
+	}
+
+	if (food_remaining <= 0) {
+		cout << "You lost because you ran out of food." << endl;
+		handle_status();
+		return true;
+	}
+
+	if ((month == 12 && day == 31) && miles_traveled < TOTAL_MILES_TO_OREGON) {
+		cout << "You lost because you didn't make it to Oregon before December 31st." << endl;
 		handle_status();
 		return true;
 	}
