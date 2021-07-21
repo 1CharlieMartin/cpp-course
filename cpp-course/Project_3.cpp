@@ -84,9 +84,7 @@ void Project_3::set_sick_days() {
 // input: pNumDays - an integer number of days.
 void Project_3::advance_game_clock(int pNumDays) {
 	int daysthisTravel = 0;
-	travelStartMonth = months[month].first;
-	travelStartDay = to_string(day);
-	cout << "You started traveling on " << travelStartMonth + " " + travelStartDay + "." << endl; 
+	cout << "You started traveling on " << months[month].first << " " << to_string(day) << "." << endl;
 	while (daysthisTravel < pNumDays) {
 
 		food_remaining -= 5; // eat
@@ -94,7 +92,7 @@ void Project_3::advance_game_clock(int pNumDays) {
 		//random sickness
 		if (day == sick_days.first || day == sick_days.second) {
 			health_level--;
-			cout << "You got sick on " << months[month].first + " " + to_string(day) + "." << endl;
+			cout << "You got sick on " << months[month].first << " " << to_string(day) << "." << endl;
 			cout << "Your health level has been decreased to " << health_level << "." << endl; 
 		}
 
@@ -143,17 +141,7 @@ void Project_3::handle_rest() {
 	std::uniform_int_distribution<int> randDays(MIN_DAYS_PER_REST, MAX_DAYS_PER_REST);
 	int days_this_rest = randDays(generator);
 
-	int health_level_before = health_level;
 	advance_game_clock(days_this_rest);
-	int health_level_after = health_level;
-
-	if (health_level_before == health_level_after)
-		cout << "Traveling did not decrease your health level of " << health_level_before << endl;
-	else
-		cout << "You got sick while resting. Your health level now is " << health_level << endl;
-
-	cout << "Starting on " << travelStartMonth << " " + travelStartDay << " you traveled for " << days_this_rest << " days." << endl;
-	cout << date_report() << endl;
 }
 
 // Hunt for a random number of days.

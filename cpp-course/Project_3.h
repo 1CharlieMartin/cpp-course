@@ -53,8 +53,6 @@ private:
 	bool playing = true;
 	bool quit = false;
 	bool loop = true;
-	string travelStartMonth;
-	string travelStartDay;
 
 	// Months and the number of days in each month. Put a dummy entry in location 0 so that
 	// we can use the number of the month as the index into the array. Since we don't know
