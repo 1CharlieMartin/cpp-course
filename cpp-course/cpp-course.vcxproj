@@ -154,6 +154,7 @@
     <ClCompile Include="Lab_3_02.cpp" />
     <ClCompile Include="Lab_3_03.cpp" />
     <ClCompile Include="Lab_3_04.cpp" />
+    <ClCompile Include="Lab_4_01.cpp" />
     <ClCompile Include="Project_1.cpp" />
     <ClCompile Include="Project_2.cpp" />
     <ClCompile Include="Project_3.cpp" />
@@ -173,6 +174,7 @@
     <ClInclude Include="Lab_3_02.h" />
     <ClInclude Include="Lab_3_03.h" />
     <ClInclude Include="Lab_3_04.h" />
+    <ClInclude Include="Lab_4_01.h" />
     <ClInclude Include="Project_1.h" />
     <ClInclude Include="Project_2.h" />
     <ClInclude Include="Project_3.h" />
