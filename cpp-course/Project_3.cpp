@@ -82,9 +82,9 @@ void Project_3::set_sick_days() {
 // Each day brings with it a random chance of sickness. 
 // If it's 12/31, day and daysthisTravel don't increase; maybe_rollover_month won't get called.
 // input: pNumDays - an integer number of days.
-void Project_3::advance_game_clock(int pNumDays) {
+void Project_3::advance_game_clock(int pNumDays, const string& pActivity) {
 	int daysthisTravel = 0;
-	cout << "You started traveling on " << months[month].first << " " << to_string(day) << "." << endl;
+	cout << "You started " << pActivity << "ing on " << months[month].first << " " << to_string(day) << "." << endl;
 	while (daysthisTravel < pNumDays) {
 
 		food_remaining -= 5; // eat
@@ -117,7 +117,7 @@ void Project_3::handle_travel() {
 	std::uniform_int_distribution<int> days_this_travel(MIN_DAYS_PER_TRAVEL, MAX_DAYS_PER_TRAVEL);
 	int random_travel = days_this_travel(generator);
 	
-	advance_game_clock(random_travel);
+	advance_game_clock(random_travel, "travel");
 
 	cout << "You have traveled for " << to_string(random_travel) << " days and have covered " << to_string(miles_this_travel) << " miles." << endl;
 	cout << "You are now " << to_string(miles_traveled) << " miles from Independence, with " << to_string(TOTAL_MILES_TO_OREGON - miles_traveled) << " miles remaining." << endl;
@@ -141,7 +141,7 @@ void Project_3::handle_rest() {
 	std::uniform_int_distribution<int> randDays(MIN_DAYS_PER_REST, MAX_DAYS_PER_REST);
 	int days_this_rest = randDays(generator);
 
-	advance_game_clock(days_this_rest);
+	advance_game_clock(days_this_rest, "rest");
 }
 
 // Hunt for a random number of days.
@@ -153,7 +153,7 @@ void Project_3::handle_hunt() {
 	std::uniform_int_distribution<int> randDays(MIN_DAYS_PER_HUNT, MAX_DAYS_PER_HUNT);
 	int days_this_hunt = randDays(generator);
 	
-	advance_game_clock(days_this_hunt);
+	advance_game_clock(days_this_hunt, "hunt");
 
 	cout << "Your food supply has been increased by 100lbs. The hunt took up " << days_this_hunt << " days." << endl;
 	cout << date_report() << endl;

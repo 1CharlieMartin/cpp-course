@@ -104,7 +104,7 @@ private:
 	void handle_help();
 
 	// Helper functions.
-	void advance_game_clock(int pNumDays);
+	void advance_game_clock(int pNumDays, const string& pActivity);
 
 	void maybe_rollover_month();
 
