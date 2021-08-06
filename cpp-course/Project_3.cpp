@@ -142,6 +142,8 @@ void Project_3::handle_rest() {
 	int days_this_rest = randDays(generator);
 
 	advance_game_clock(days_this_rest, "rest");
+	cout << "You have rested for " << to_string(days_this_rest) << " days." << endl;
+	cout << date_report() << endl;
 }
 
 // Hunt for a random number of days.
