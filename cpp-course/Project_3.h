@@ -48,11 +48,10 @@ private:
 	pair<int, int> sick_days;
 	int month = 3;
 	int day = 1;
-	int sicknesses_suffered_this_month = 0;
 	string player_name;
 	bool playing = true;
 	bool quit = false;
-	bool loop = true;
+	
 
 	// Months and the number of days in each month. Put a dummy entry in location 0 so that
 	// we can use the number of the month as the index into the array. Since we don't know
