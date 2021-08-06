@@ -15,10 +15,10 @@ void Lab_4_01::execute() {
 	//** Code goes here
 	// call remove_vowels() with the user input as a parameter
 	// and display the returned string.
-
+	//cout << remove_vowels(inputLine);
 	// call count_vowels() with the same user input as a parameter
 	// and display the number of vowels.
-	
+	//cout << count_vowels(inputLine);
 	// combine the two operations into one.
 	// call remove_and_count_vowels with the same user input as a parameter
 	// and return a pair in which first is the vowel free string and second
@@ -34,6 +34,11 @@ string Lab_4_01::remove_vowels(const string& pUserInput) {
 	string vowel_free_string;
 
 	//** Code goes here; use a loop and check each character.
+
+	for (char current_char : pUserInput) {
+		if (current_char != 'a' && current_char != 'e' && current_char != 'i' && current_char != 'o' && current_char != 'u')
+			vowel_free_string.append(current_char);
+	}
 
 	return vowel_free_string;
 }
