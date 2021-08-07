@@ -37,7 +37,7 @@ string Lab_4_01::remove_vowels(const string& pUserInput) {
 
 	for (char current_char : pUserInput) {
 		if (current_char != 'a' && current_char != 'e' && current_char != 'i' && current_char != 'o' && current_char != 'u')
-			vowel_free_string.append(current_char);
+			vowel_free_string.append(1, current_char);
 	}
 
 	return vowel_free_string;
