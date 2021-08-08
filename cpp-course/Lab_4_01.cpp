@@ -47,7 +47,10 @@ int Lab_4_01::count_vowels(const string& pUserInput) {
 	int vowel_count = 0;
 
 	//** Code goes here; use a loop and check each character.
-
+	for (char current_char : pUserInput) {
+		if (current_char != 'a' && current_char != 'e' && current_char != 'i' && current_char != 'o' && current_char != 'u')
+			vowel_count++;
+	}
 	return vowel_count;
 }
 
