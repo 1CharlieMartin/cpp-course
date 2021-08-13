@@ -16,14 +16,7 @@ void Lab_4_01::execute() {
 	cout << "There were " << count_vowels(inputLine) << " vowels in your string." << endl;
 
 
-	//** Code goes here
-	// call remove_vowels() with the user input as a parameter
-	// and display the returned string.
-	//cout << remove_vowels(inputLine);
-	// call count_vowels() with the same user input as a parameter
-	// and display the number of vowels.
-	//cout << count_vowels(inputLine);
-	// combine the two operations into one.
+	// Combine the two operations into one.
 	// call remove_and_count_vowels with the same user input as a parameter
 	// and return a pair in which first is the vowel free string and second
 	// is the number of vowels removed.
@@ -37,10 +30,9 @@ void Lab_4_01::execute() {
 string Lab_4_01::remove_vowels(const string& pUserInput) {
 	string vowel_free_string;
 
-	//** Code goes here; use a loop and check each character.
-
 	for (char current_char : pUserInput) {
-		if (current_char != 'a' && current_char != 'e' && current_char != 'i' && current_char != 'o' && current_char != 'u')
+		if (current_char != 'a' && current_char != 'e' && current_char != 'i' && current_char != 'o' && current_char != 'u' &&
+			current_char != 'A' && current_char != 'E' && current_char != 'I' && current_char != 'O' && current_char != 'U')
 			vowel_free_string.append(1, current_char);
 	}
 
@@ -50,9 +42,9 @@ string Lab_4_01::remove_vowels(const string& pUserInput) {
 int Lab_4_01::count_vowels(const string& pUserInput) {
 	int vowel_count = 0;
 
-	//** Code goes here; use a loop and check each character.
 	for (char current_char : pUserInput) {
-		if (current_char == 'a' || current_char == 'e' || current_char == 'i' || current_char == 'o' || current_char == 'u')
+		if (current_char == 'a' || current_char == 'e' || current_char == 'i' || current_char == 'o' || current_char == 'u' ||
+			current_char == 'A' || current_char == 'E' || current_char == 'I' || current_char == 'O' || current_char == 'U')
 			vowel_count++;
 	}
 	return vowel_count;
