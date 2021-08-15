@@ -21,6 +21,7 @@
 #include "Lab_3_04.h"
 #include "Project_3.h"
 #include "Lab_4_01.h"
+#include "Lab_4_02.h"
 
 int main()
 {
@@ -75,6 +76,9 @@ int main()
 	//Project_3 project_3;
 	//project_3.execute();
 
-	Lab_4_01 lab_4_01;
-	lab_4_01.execute();
+	//Lab_4_01 lab_4_01;
+	//lab_4_01.execute();
+
+	Lab_4_02 lab_4_02;
+	lab_4_02.execute();
 }
