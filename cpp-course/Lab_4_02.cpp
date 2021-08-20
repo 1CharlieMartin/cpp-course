@@ -36,8 +36,15 @@ string Lab_4_02::pluralize_fruits(const list<string>& pListOfSingularFruits) {
 
 	// Use a standard 'for' loop
 	for (int i = 0; i < pListOfSingularFruits.size(); i++) {
-
 		//** CODE goes here
+
+		if (pListOfSingularFruits[i].back == "y") {
+			//pListOfSingularFruits[i].erase(pListOfSingularFruits[i].length() - 1, 1);
+			pListOfSingularFruits[i].pop_back();
+			pListOfSingularFruits[i].append(3, "ies");
+		}
+
+		cout << (pListOfSingularFruits[i]) << endl;
 
 	}
 
@@ -61,3 +68,5 @@ std::list<std::string> Lab_4_02::splitString(const std::string& stringToSplit, c
 
 	return result;
 }
+
+

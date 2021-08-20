@@ -34,4 +34,5 @@ private:
 	// Utility to split a string into tokens.
 	std::list<std::string> splitString(const std::string& stringToSplit, const std::string& regexPattern);
 
+
 };
