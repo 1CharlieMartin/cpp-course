@@ -29,10 +29,10 @@ private:
 	// from inside the execute() function or from any other private function in
 	// class Lab_4_02.
 
-	string pluralize_fruits(const list<string>& pListOfSingularFruits);
+	string pluralize_fruits(const vector<string>& pListOfSingularFruits);
 
 	// Utility to split a string into tokens.
-	std::list<std::string> splitString(const std::string& stringToSplit, const std::string& regexPattern);
+	std::vector<std::string> splitString(const std::string& stringToSplit, const std::string& regexPattern);
 
 
 };

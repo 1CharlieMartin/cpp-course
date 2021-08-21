@@ -16,7 +16,7 @@ void Lab_4_02::execute() {
 
 	// The input from the user is a single string. We need to split the string up into a list
 	// of individual fruits.
-	list<string> listOfFruits = splitString(inputLine, "\\s+");
+	vector<string> listOfFruits = splitString(inputLine, "\\s+");
 
 	cout << "Fruit plurals: " << pluralize_fruits(listOfFruits) << endl;
 
@@ -31,20 +31,20 @@ void Lab_4_02::execute() {
 	}
 
 
-string Lab_4_02::pluralize_fruits(const list<string>& pListOfSingularFruits) {
+string Lab_4_02::pluralize_fruits(const vector<string>& pSingularFruits) {
+	string oneFruit;
 	string pluralized_fruits;
 
 	// Use a standard 'for' loop
-	for (int i = 0; i < pListOfSingularFruits.size(); i++) {
-		//** CODE goes here
+	for (int i = 0; i < pSingularFruits.size(); i++) {
+		oneFruit = pSingularFruits[i];
 
-		if (pListOfSingularFruits[i].back == "y") {
-			//pListOfSingularFruits[i].erase(pListOfSingularFruits[i].length() - 1, 1);
-			pListOfSingularFruits[i].pop_back();
-			pListOfSingularFruits[i].append(3, "ies");
+		if (oneFruit.back() = 'y') { // back() is a function that returns the last character in a string
+			oneFruit.pop_back(); // remove the last character
+			oneFruit.append("ies");
 		}
 
-		cout << (pListOfSingularFruits[i]) << endl;
+		cout << (pluralized_fruits) << endl;
 
 	}
 
@@ -54,9 +54,9 @@ string Lab_4_02::pluralize_fruits(const list<string>& pListOfSingularFruits) {
 //** CODE goes here for reverse_string.
 
 
-std::list<std::string> Lab_4_02::splitString(const std::string& stringToSplit, const std::string& regexPattern)
+std::vector<std::string> Lab_4_02::splitString(const std::string& stringToSplit, const std::string& regexPattern)
 {
-	std::list<std::string> result;
+	std::vector<std::string> result;
 
 	const std::regex rgx(regexPattern);
 	std::sregex_token_iterator iter(stringToSplit.begin(), stringToSplit.end(), rgx, -1);
