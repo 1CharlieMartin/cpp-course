@@ -31,6 +31,8 @@ private:
 
 	string pluralize_fruits(const vector<string>& pListOfSingularFruits);
 
+	string pluralize_fruits_2(const vector<string>& pListOfSingularFruits);
+
 	// Utility to split a string into tokens.
 	std::vector<std::string> splitString(const std::string& stringToSplit, const std::string& regexPattern);
 

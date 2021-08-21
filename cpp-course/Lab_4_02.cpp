@@ -51,6 +51,18 @@ string Lab_4_02::pluralize_fruits(const vector<string>& pSingularFruits) {
 	return pluralized_fruits;
 }
 
+//** Variation of pluralize_fruits
+string Lab_4_02::pluralize_fruits_2(const vector<string>& pSingularFruits) {
+	string pluralized_fruits;
+
+	for (string oneFruit : pSingularFruits) {
+		//** CODE goes here
+	}
+
+	return pluralized_fruits;
+}
+
+
 //** CODE goes here for reverse_string.
 
 
